@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "XYLoginViewController.h"
 
 @interface ViewController ()
 
@@ -19,5 +20,9 @@
     // Do any additional setup after loading the view.
 }
 
+- (IBAction)login:(id)sender {
+    
+    [[XYLoginViewController sharedInstance] showWithStyle:XYLoginViewStyleLogin superController:self];
+}
 
 @end

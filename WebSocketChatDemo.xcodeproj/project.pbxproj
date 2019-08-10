@@ -13,6 +13,18 @@
 		D24BC68B22FE98B2000F905D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24BC68A22FE98B2000F905D /* Assets.xcassets */; };
 		D24BC68E22FE98B2000F905D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24BC68C22FE98B2000F905D /* LaunchScreen.storyboard */; };
 		D24BC69122FE98B2000F905D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC69022FE98B2000F905D /* main.m */; };
+		D24BC69F22FE9B01000F905D /* XYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC69D22FE9B01000F905D /* XYLoginViewController.m */; };
+		D24BC6BB22FE9B5E000F905D /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6A422FE9B5E000F905D /* MMMaterialDesignSpinner.m */; };
+		D24BC6BC22FE9B5E000F905D /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6A622FE9B5E000F905D /* SVRadialGradientLayer.m */; };
+		D24BC6BD22FE9B5E000F905D /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6A922FE9B5E000F905D /* SVProgressAnimatedView.m */; };
+		D24BC6BE22FE9B5E000F905D /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6AC22FE9B5E000F905D /* SVProgressHUD.m */; };
+		D24BC6BF22FE9B5E000F905D /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6AD22FE9B5E000F905D /* SVIndefiniteAnimatedView.m */; };
+		D24BC6C022FE9B5E000F905D /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D24BC6AE22FE9B5E000F905D /* SVProgressHUD.bundle */; };
+		D24BC6C122FE9B5E000F905D /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B622FE9B5E000F905D /* FBShimmeringLayer.m */; };
+		D24BC6C222FE9B5E000F905D /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B722FE9B5E000F905D /* FBShimmeringView.m */; };
+		D24BC6C322FE9B5E000F905D /* DeformationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B922FE9B5E000F905D /* DeformationButton.m */; };
+		D24BC6C522FE9C86000F905D /* XYLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24BC6C422FE9C86000F905D /* XYLoginViewController.xib */; };
+		D24BC6C822FEA297000F905D /* XYWeakTimerTargetObj.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +38,31 @@
 		D24BC68D22FE98B2000F905D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D24BC68F22FE98B2000F905D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D24BC69022FE98B2000F905D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D24BC69C22FE9B01000F905D /* XYLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYLoginViewController.h; sourceTree = "<group>"; };
+		D24BC69D22FE9B01000F905D /* XYLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYLoginViewController.m; sourceTree = "<group>"; };
+		D24BC6A222FE9B5E000F905D /* DeformationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeformationButton.h; path = WebSocketChatDemo/Extra/DeformationButton.h; sourceTree = SOURCE_ROOT; };
+		D24BC6A422FE9B5E000F905D /* MMMaterialDesignSpinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMaterialDesignSpinner.m; path = WebSocketChatDemo/Extra/MMMaterialDesignSpinner.m; sourceTree = SOURCE_ROOT; };
+		D24BC6A622FE9B5E000F905D /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		D24BC6A722FE9B5E000F905D /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		D24BC6A822FE9B5E000F905D /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		D24BC6A922FE9B5E000F905D /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressAnimatedView.m; sourceTree = "<group>"; };
+		D24BC6AA22FE9B5E000F905D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		D24BC6AB22FE9B5E000F905D /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		D24BC6AC22FE9B5E000F905D /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		D24BC6AD22FE9B5E000F905D /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		D24BC6AE22FE9B5E000F905D /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		D24BC6AF22FE9B5E000F905D /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		D24BC6B222FE9B5E000F905D /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
+		D24BC6B322FE9B5E000F905D /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
+		D24BC6B422FE9B5E000F905D /* FBShimmering-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBShimmering-Prefix.pch"; sourceTree = "<group>"; };
+		D24BC6B522FE9B5E000F905D /* FBShimmeringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringView.h; sourceTree = "<group>"; };
+		D24BC6B622FE9B5E000F905D /* FBShimmeringLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringLayer.m; sourceTree = "<group>"; };
+		D24BC6B722FE9B5E000F905D /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
+		D24BC6B822FE9B5E000F905D /* MMMaterialDesignSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMaterialDesignSpinner.h; path = WebSocketChatDemo/Extra/MMMaterialDesignSpinner.h; sourceTree = SOURCE_ROOT; };
+		D24BC6B922FE9B5E000F905D /* DeformationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeformationButton.m; path = WebSocketChatDemo/Extra/DeformationButton.m; sourceTree = SOURCE_ROOT; };
+		D24BC6C422FE9C86000F905D /* XYLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XYLoginViewController.xib; path = ../../../../../../../../../../Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYLoginViewController.xib; sourceTree = "<group>"; };
+		D24BC6C622FEA297000F905D /* XYWeakTimerTargetObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYWeakTimerTargetObj.h; path = WebSocketChatDemo/Extra/XYWeakTimerTargetObj.h; sourceTree = SOURCE_ROOT; };
+		D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYWeakTimerTargetObj.m; path = WebSocketChatDemo/Extra/XYWeakTimerTargetObj.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +95,8 @@
 		D24BC68022FE98AE000F905D /* WebSocketChatDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D24BC6A122FE9B3C000F905D /* Extra */,
+				D24BC69822FE9A9C000F905D /* Login */,
 				D24BC68122FE98AE000F905D /* AppDelegate.h */,
 				D24BC68222FE98AE000F905D /* AppDelegate.m */,
 				D24BC68422FE98AE000F905D /* ViewController.h */,
@@ -70,6 +109,64 @@
 			);
 			path = WebSocketChatDemo;
 			sourceTree = "<group>";
+		};
+		D24BC69822FE9A9C000F905D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D24BC6C422FE9C86000F905D /* XYLoginViewController.xib */,
+				D24BC69C22FE9B01000F905D /* XYLoginViewController.h */,
+				D24BC69D22FE9B01000F905D /* XYLoginViewController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D24BC6A122FE9B3C000F905D /* Extra */ = {
+			isa = PBXGroup;
+			children = (
+				D24BC6A222FE9B5E000F905D /* DeformationButton.h */,
+				D24BC6B922FE9B5E000F905D /* DeformationButton.m */,
+				D24BC6B122FE9B5E000F905D /* FBShimmering */,
+				D24BC6B822FE9B5E000F905D /* MMMaterialDesignSpinner.h */,
+				D24BC6A422FE9B5E000F905D /* MMMaterialDesignSpinner.m */,
+				D24BC6A522FE9B5E000F905D /* SVProgressHUD */,
+				D24BC6C622FEA297000F905D /* XYWeakTimerTargetObj.h */,
+				D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */,
+			);
+			name = Extra;
+			path = ../../../../../../../../../Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Extra;
+			sourceTree = "<group>";
+		};
+		D24BC6A522FE9B5E000F905D /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D24BC6A622FE9B5E000F905D /* SVRadialGradientLayer.m */,
+				D24BC6A722FE9B5E000F905D /* SVIndefiniteAnimatedView.h */,
+				D24BC6A822FE9B5E000F905D /* SVProgressHUD.h */,
+				D24BC6A922FE9B5E000F905D /* SVProgressAnimatedView.m */,
+				D24BC6AA22FE9B5E000F905D /* SVProgressHUD-Prefix.pch */,
+				D24BC6AB22FE9B5E000F905D /* SVRadialGradientLayer.h */,
+				D24BC6AC22FE9B5E000F905D /* SVProgressHUD.m */,
+				D24BC6AD22FE9B5E000F905D /* SVIndefiniteAnimatedView.m */,
+				D24BC6AE22FE9B5E000F905D /* SVProgressHUD.bundle */,
+				D24BC6AF22FE9B5E000F905D /* SVProgressAnimatedView.h */,
+			);
+			name = SVProgressHUD;
+			path = WebSocketChatDemo/Extra/SVProgressHUD;
+			sourceTree = SOURCE_ROOT;
+		};
+		D24BC6B122FE9B5E000F905D /* FBShimmering */ = {
+			isa = PBXGroup;
+			children = (
+				D24BC6B222FE9B5E000F905D /* FBShimmering.h */,
+				D24BC6B322FE9B5E000F905D /* FBShimmeringLayer.h */,
+				D24BC6B422FE9B5E000F905D /* FBShimmering-Prefix.pch */,
+				D24BC6B522FE9B5E000F905D /* FBShimmeringView.h */,
+				D24BC6B622FE9B5E000F905D /* FBShimmeringLayer.m */,
+				D24BC6B722FE9B5E000F905D /* FBShimmeringView.m */,
+			);
+			name = FBShimmering;
+			path = WebSocketChatDemo/Extra/FBShimmering;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -128,7 +225,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D24BC6C022FE9B5E000F905D /* SVProgressHUD.bundle in Resources */,
 				D24BC68E22FE98B2000F905D /* LaunchScreen.storyboard in Resources */,
+				D24BC6C522FE9C86000F905D /* XYLoginViewController.xib in Resources */,
 				D24BC68B22FE98B2000F905D /* Assets.xcassets in Resources */,
 				D24BC68922FE98AE000F905D /* Main.storyboard in Resources */,
 			);
@@ -141,9 +240,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D24BC6BC22FE9B5E000F905D /* SVRadialGradientLayer.m in Sources */,
+				D24BC6C122FE9B5E000F905D /* FBShimmeringLayer.m in Sources */,
 				D24BC68622FE98AE000F905D /* ViewController.m in Sources */,
 				D24BC69122FE98B2000F905D /* main.m in Sources */,
 				D24BC68322FE98AE000F905D /* AppDelegate.m in Sources */,
+				D24BC6BF22FE9B5E000F905D /* SVIndefiniteAnimatedView.m in Sources */,
+				D24BC6C822FEA297000F905D /* XYWeakTimerTargetObj.m in Sources */,
+				D24BC6C222FE9B5E000F905D /* FBShimmeringView.m in Sources */,
+				D24BC6BE22FE9B5E000F905D /* SVProgressHUD.m in Sources */,
+				D24BC6BB22FE9B5E000F905D /* MMMaterialDesignSpinner.m in Sources */,
+				D24BC6C322FE9B5E000F905D /* DeformationButton.m in Sources */,
+				D24BC69F22FE9B01000F905D /* XYLoginViewController.m in Sources */,
+				D24BC6BD22FE9B5E000F905D /* SVProgressAnimatedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
