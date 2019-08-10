@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  XYMainNavigationController.h
 //  WebSocketChatDemo
 //
 //  Created by swae on 2019/8/10.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface XYMainNavigationController : UINavigationController
 
 @end
 
+NS_ASSUME_NONNULL_END

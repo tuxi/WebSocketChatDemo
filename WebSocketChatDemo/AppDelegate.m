@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "XYMainNavigationController.h"
+#import "XYChatListViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    self.window.rootViewController = [[XYMainNavigationController alloc] initWithRootViewController:[XYChatListViewController new]];
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

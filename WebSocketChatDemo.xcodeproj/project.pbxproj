@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA4C0ECBDBBE09801C87DFBC /* libPods-WebSocketChatDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEFD1E2214BDE81D1EF5962 /* libPods-WebSocketChatDemo.a */; };
 		D24BC68322FE98AE000F905D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC68222FE98AE000F905D /* AppDelegate.m */; };
-		D24BC68622FE98AE000F905D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC68522FE98AE000F905D /* ViewController.m */; };
-		D24BC68922FE98AE000F905D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24BC68722FE98AE000F905D /* Main.storyboard */; };
 		D24BC68B22FE98B2000F905D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24BC68A22FE98B2000F905D /* Assets.xcassets */; };
 		D24BC68E22FE98B2000F905D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24BC68C22FE98B2000F905D /* LaunchScreen.storyboard */; };
 		D24BC69122FE98B2000F905D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC69022FE98B2000F905D /* main.m */; };
@@ -25,15 +24,19 @@
 		D24BC6C322FE9B5E000F905D /* DeformationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B922FE9B5E000F905D /* DeformationButton.m */; };
 		D24BC6C522FE9C86000F905D /* XYLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24BC6C422FE9C86000F905D /* XYLoginViewController.xib */; };
 		D24BC6C822FEA297000F905D /* XYWeakTimerTargetObj.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */; };
+		D24BC6CC22FEDB9C000F905D /* XYChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6CB22FEDB9C000F905D /* XYChatListViewController.m */; };
+		D24BC6D022FEE3B3000F905D /* XYAccountAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6CF22FEE3B3000F905D /* XYAccountAuth.m */; };
+		D24BC6D322FEE43E000F905D /* XYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6D222FEE43E000F905D /* XYUser.m */; };
+		D24BC6D922FEEBA5000F905D /* XYAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6D822FEEBA5000F905D /* XYAuthenticationManager.m */; };
+		D24BC6DC22FEF593000F905D /* XYMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6DB22FEF593000F905D /* XYMainNavigationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DEFD1E2214BDE81D1EF5962 /* libPods-WebSocketChatDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WebSocketChatDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF5F68C2281EE800D915990E /* Pods-WebSocketChatDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSocketChatDemo.release.xcconfig"; path = "Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo.release.xcconfig"; sourceTree = "<group>"; };
 		D24BC67E22FE98AE000F905D /* WebSocketChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebSocketChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24BC68122FE98AE000F905D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D24BC68222FE98AE000F905D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D24BC68422FE98AE000F905D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D24BC68522FE98AE000F905D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D24BC68822FE98AE000F905D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D24BC68A22FE98B2000F905D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D24BC68D22FE98B2000F905D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D24BC68F22FE98B2000F905D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,6 +66,17 @@
 		D24BC6C422FE9C86000F905D /* XYLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XYLoginViewController.xib; path = ../../../../../../../../../../Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYLoginViewController.xib; sourceTree = "<group>"; };
 		D24BC6C622FEA297000F905D /* XYWeakTimerTargetObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYWeakTimerTargetObj.h; path = WebSocketChatDemo/Extra/XYWeakTimerTargetObj.h; sourceTree = SOURCE_ROOT; };
 		D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYWeakTimerTargetObj.m; path = WebSocketChatDemo/Extra/XYWeakTimerTargetObj.m; sourceTree = SOURCE_ROOT; };
+		D24BC6CA22FEDB9C000F905D /* XYChatListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYChatListViewController.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYChatListViewController.h; sourceTree = "<group>"; };
+		D24BC6CB22FEDB9C000F905D /* XYChatListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYChatListViewController.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYChatListViewController.m; sourceTree = "<group>"; };
+		D24BC6CE22FEE3B3000F905D /* XYAccountAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYAccountAuth.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYAccountAuth.h; sourceTree = "<group>"; };
+		D24BC6CF22FEE3B3000F905D /* XYAccountAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYAccountAuth.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYAccountAuth.m; sourceTree = "<group>"; };
+		D24BC6D122FEE43E000F905D /* XYUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYUser.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYUser.h; sourceTree = "<group>"; };
+		D24BC6D222FEE43E000F905D /* XYUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYUser.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYUser.m; sourceTree = "<group>"; };
+		D24BC6D722FEEBA5000F905D /* XYAuthenticationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYAuthenticationManager.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYAuthenticationManager.h; sourceTree = "<group>"; };
+		D24BC6D822FEEBA5000F905D /* XYAuthenticationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYAuthenticationManager.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYAuthenticationManager.m; sourceTree = "<group>"; };
+		D24BC6DA22FEF593000F905D /* XYMainNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYMainNavigationController.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMainNavigationController.h; sourceTree = "<group>"; };
+		D24BC6DB22FEF593000F905D /* XYMainNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYMainNavigationController.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMainNavigationController.m; sourceTree = "<group>"; };
+		EF2B6BDF09F7F3F19E55B6D8 /* Pods-WebSocketChatDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSocketChatDemo.debug.xcconfig"; path = "Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA4C0ECBDBBE09801C87DFBC /* libPods-WebSocketChatDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +96,8 @@
 			children = (
 				D24BC68022FE98AE000F905D /* WebSocketChatDemo */,
 				D24BC67F22FE98AE000F905D /* Products */,
+				F3312973DD386F6ACDF515E7 /* Pods */,
+				F19B1867EF1F81FBFBB704FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,13 +112,12 @@
 		D24BC68022FE98AE000F905D /* WebSocketChatDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D24BC6CD22FEE359000F905D /* Networking */,
+				D24BC6C922FEA9FC000F905D /* Chat */,
 				D24BC6A122FE9B3C000F905D /* Extra */,
 				D24BC69822FE9A9C000F905D /* Login */,
 				D24BC68122FE98AE000F905D /* AppDelegate.h */,
 				D24BC68222FE98AE000F905D /* AppDelegate.m */,
-				D24BC68422FE98AE000F905D /* ViewController.h */,
-				D24BC68522FE98AE000F905D /* ViewController.m */,
-				D24BC68722FE98AE000F905D /* Main.storyboard */,
 				D24BC68A22FE98B2000F905D /* Assets.xcassets */,
 				D24BC68C22FE98B2000F905D /* LaunchScreen.storyboard */,
 				D24BC68F22FE98B2000F905D /* Info.plist */,
@@ -116,6 +132,10 @@
 				D24BC6C422FE9C86000F905D /* XYLoginViewController.xib */,
 				D24BC69C22FE9B01000F905D /* XYLoginViewController.h */,
 				D24BC69D22FE9B01000F905D /* XYLoginViewController.m */,
+				D24BC6D122FEE43E000F905D /* XYUser.h */,
+				D24BC6D222FEE43E000F905D /* XYUser.m */,
+				D24BC6D722FEEBA5000F905D /* XYAuthenticationManager.h */,
+				D24BC6D822FEEBA5000F905D /* XYAuthenticationManager.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -168,6 +188,44 @@
 			path = WebSocketChatDemo/Extra/FBShimmering;
 			sourceTree = SOURCE_ROOT;
 		};
+		D24BC6C922FEA9FC000F905D /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D24BC6CA22FEDB9C000F905D /* XYChatListViewController.h */,
+				D24BC6CB22FEDB9C000F905D /* XYChatListViewController.m */,
+				D24BC6DA22FEF593000F905D /* XYMainNavigationController.h */,
+				D24BC6DB22FEF593000F905D /* XYMainNavigationController.m */,
+			);
+			name = Chat;
+			path = ../../../../../../../../../Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat;
+			sourceTree = "<group>";
+		};
+		D24BC6CD22FEE359000F905D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D24BC6CE22FEE3B3000F905D /* XYAccountAuth.h */,
+				D24BC6CF22FEE3B3000F905D /* XYAccountAuth.m */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		F19B1867EF1F81FBFBB704FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DEFD1E2214BDE81D1EF5962 /* libPods-WebSocketChatDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F3312973DD386F6ACDF515E7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF2B6BDF09F7F3F19E55B6D8 /* Pods-WebSocketChatDemo.debug.xcconfig */,
+				BF5F68C2281EE800D915990E /* Pods-WebSocketChatDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -175,9 +233,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D24BC69422FE98B2000F905D /* Build configuration list for PBXNativeTarget "WebSocketChatDemo" */;
 			buildPhases = (
+				015B42503356504CBA7D46FB /* [CP] Check Pods Manifest.lock */,
 				D24BC67A22FE98AD000F905D /* Sources */,
 				D24BC67B22FE98AD000F905D /* Frameworks */,
 				D24BC67C22FE98AD000F905D /* Resources */,
+				47C5E982C478359046789330 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,11 +289,69 @@
 				D24BC68E22FE98B2000F905D /* LaunchScreen.storyboard in Resources */,
 				D24BC6C522FE9C86000F905D /* XYLoginViewController.xib in Resources */,
 				D24BC68B22FE98B2000F905D /* Assets.xcassets in Resources */,
-				D24BC68922FE98AE000F905D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		015B42503356504CBA7D46FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WebSocketChatDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		47C5E982C478359046789330 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo-resources.sh",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Assets/JSQMessagesAssets.bundle",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Controllers/JSQMessagesViewController.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesCollectionViewCellIncoming.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesCollectionViewCellOutgoing.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesLoadEarlierHeaderView.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesToolbarContentView.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesTypingIndicatorFooterView.xib",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesAssets.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesCollectionViewCellIncoming.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesCollectionViewCellOutgoing.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesLoadEarlierHeaderView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesToolbarContentView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesTypingIndicatorFooterView.nib",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D24BC67A22FE98AD000F905D /* Sources */ = {
@@ -241,32 +359,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				D24BC6BC22FE9B5E000F905D /* SVRadialGradientLayer.m in Sources */,
+				D24BC6CC22FEDB9C000F905D /* XYChatListViewController.m in Sources */,
+				D24BC6D022FEE3B3000F905D /* XYAccountAuth.m in Sources */,
+				D24BC6D322FEE43E000F905D /* XYUser.m in Sources */,
 				D24BC6C122FE9B5E000F905D /* FBShimmeringLayer.m in Sources */,
-				D24BC68622FE98AE000F905D /* ViewController.m in Sources */,
 				D24BC69122FE98B2000F905D /* main.m in Sources */,
 				D24BC68322FE98AE000F905D /* AppDelegate.m in Sources */,
 				D24BC6BF22FE9B5E000F905D /* SVIndefiniteAnimatedView.m in Sources */,
 				D24BC6C822FEA297000F905D /* XYWeakTimerTargetObj.m in Sources */,
 				D24BC6C222FE9B5E000F905D /* FBShimmeringView.m in Sources */,
 				D24BC6BE22FE9B5E000F905D /* SVProgressHUD.m in Sources */,
+				D24BC6DC22FEF593000F905D /* XYMainNavigationController.m in Sources */,
 				D24BC6BB22FE9B5E000F905D /* MMMaterialDesignSpinner.m in Sources */,
 				D24BC6C322FE9B5E000F905D /* DeformationButton.m in Sources */,
 				D24BC69F22FE9B01000F905D /* XYLoginViewController.m in Sources */,
 				D24BC6BD22FE9B5E000F905D /* SVProgressAnimatedView.m in Sources */,
+				D24BC6D922FEEBA5000F905D /* XYAuthenticationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D24BC68722FE98AE000F905D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D24BC68822FE98AE000F905D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D24BC68C22FE98B2000F905D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -392,6 +506,7 @@
 		};
 		D24BC69522FE98B2000F905D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF2B6BDF09F7F3F19E55B6D8 /* Pods-WebSocketChatDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -410,6 +525,7 @@
 		};
 		D24BC69622FE98B2000F905D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF5F68C2281EE800D915990E /* Pods-WebSocketChatDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

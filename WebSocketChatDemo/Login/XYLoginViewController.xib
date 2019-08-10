@@ -128,7 +128,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7N-ai-Kvy">
-                            <rect key="frame" x="315" y="15" width="45" height="45"/>
+                            <rect key="frame" x="15" y="50" width="45" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="Lk4-pu-hiI"/>
                                 <constraint firstAttribute="width" constant="45" id="deJ-Yj-xuC"/>
@@ -166,7 +166,7 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="nxN-NW-hTm" firstAttribute="leading" secondItem="CHd-aM-ZDL" secondAttribute="trailing" constant="45" id="1yh-zR-h18"/>
-                        <constraint firstAttribute="trailing" secondItem="L7N-ai-Kvy" secondAttribute="trailing" constant="15" id="ACG-Cp-cJt"/>
+                        <constraint firstItem="L7N-ai-Kvy" firstAttribute="leading" secondItem="8OU-dH-fEf" secondAttribute="leading" constant="15" id="AbS-kA-X16"/>
                         <constraint firstItem="OeT-fz-cCp" firstAttribute="leading" secondItem="Mal-Fn-YeK" secondAttribute="leading" id="B47-Py-fbj"/>
                         <constraint firstItem="CHd-aM-ZDL" firstAttribute="top" secondItem="X86-vO-uNE" secondAttribute="top" id="CTh-51-JNs"/>
                         <constraint firstItem="XVM-wy-PkX" firstAttribute="leading" secondItem="Mal-Fn-YeK" secondAttribute="leading" id="EIM-O4-X2a"/>
@@ -186,7 +186,7 @@
                         <constraint firstItem="XUg-Tf-kcE" firstAttribute="leading" secondItem="8OU-dH-fEf" secondAttribute="leading" constant="137" id="doJ-yv-QOw"/>
                         <constraint firstItem="CHd-aM-ZDL" firstAttribute="leading" secondItem="X86-vO-uNE" secondAttribute="trailing" constant="45" id="eB8-kb-7LN"/>
                         <constraint firstItem="CHd-aM-ZDL" firstAttribute="top" secondItem="ova-kt-ywj" secondAttribute="bottom" constant="18" id="fXG-N2-0oB"/>
-                        <constraint firstItem="L7N-ai-Kvy" firstAttribute="top" secondItem="8OU-dH-fEf" secondAttribute="top" constant="15" id="iay-VS-oKJ"/>
+                        <constraint firstItem="L7N-ai-Kvy" firstAttribute="top" secondItem="8OU-dH-fEf" secondAttribute="top" constant="50" id="iay-VS-oKJ"/>
                         <constraint firstItem="XVM-wy-PkX" firstAttribute="top" secondItem="OeT-fz-cCp" secondAttribute="bottom" constant="10" id="lR2-CA-Bm3"/>
                         <constraint firstItem="OeT-fz-cCp" firstAttribute="top" secondItem="8OU-dH-fEf" secondAttribute="top" constant="266" id="lXN-ZJ-zf8"/>
                         <constraint firstItem="OeT-fz-cCp" firstAttribute="centerX" secondItem="8OU-dH-fEf" secondAttribute="centerX" id="lhV-DG-iCJ"/>
@@ -208,7 +208,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <point key="canvasLocation" x="114.5" y="110.5"/>
+            <point key="canvasLocation" x="114.40000000000001" y="110.09852216748769"/>
         </view>
     </objects>
     <resources>

@@ -11,8 +11,9 @@
 #import "DeformationButton.h"
 #import "XYWeakTimerTargetObj.h"
 #import "SVProgressHUD.h"
+#import "XYAccountAuth.h"
 
-#define kLoginViewHeightOffset 60
+#define kLoginViewHeightOffset 0
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define kAccount @"account"
@@ -48,9 +49,9 @@ static XYLoginViewController *_instance = nil;
     return _instance;
 }
 
-- (void)showWithStyle:(XYLoginViewStyle)style superController:(UIViewController *)superVC {
+- (void)showWithStyle:(XYLoginViewStyle)style animated:(BOOL)animated superController:(UIViewController *)superVC {
     self.currentStyle = style;
-    UIView *aView = [UIApplication sharedApplication].keyWindow;
+    UIView *aView = [UIApplication sharedApplication].delegate.window;
     self.superVC = superVC;
     self.view.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenHeight - kLoginViewHeightOffset);
     // 添加遮罩按钮
@@ -62,7 +63,17 @@ static XYLoginViewController *_instance = nil;
     [aView addSubview: self.view];
     [self.superVC addChildViewController:self];
     [self didMoveToParentViewController:self.superVC];
-    [self showAnimation];
+    
+    if (animated) {
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0.3 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.view.frame = CGRectMake(0, kLoginViewHeightOffset, kScreenWidth, kScreenHeight - kLoginViewHeightOffset + 20);
+            self.superVC.view.transform = CGAffineTransformMakeScale(0.95, 0.95);
+        } completion:nil];
+    }
+    else {
+        self.view.frame = CGRectMake(0, kLoginViewHeightOffset, kScreenWidth, kScreenHeight - kLoginViewHeightOffset + 20);
+        self.superVC.view.transform = CGAffineTransformMakeScale(0.95, 0.95);
+    }
 }
 
 //的在XIB布局后才能改变视图结构，不然会被XIB改回去
@@ -73,15 +84,6 @@ static XYLoginViewController *_instance = nil;
     }
     [self changeModelHidden];
     [self recover];
-}
-
-//重置背景位置和定时器
-- (void)recover{
-    self.isAppear = YES;
-    //启动需要时间，应设置比动画时间长，否则有可能会图像越界
-    self.timer = [XYWeakTimerTargetObj scheduledTimerWithTimeInterval:16 target:self selector:@selector(scrollScrollViewIsRecover:) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-    [self scrollScrollViewIsRecover:YES];
 }
 
 - (void)viewDidLoad {
@@ -119,13 +121,15 @@ static XYLoginViewController *_instance = nil;
 }
 
 
-// 父控制器的收缩动画
-- (void)showAnimation {
-    [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.3 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.view.frame = CGRectMake(0, kLoginViewHeightOffset, kScreenWidth, kScreenHeight - kLoginViewHeightOffset + 20);
-        self.superVC.view.transform = CGAffineTransformMakeScale(0.95, 0.95);
-    } completion:nil];
+//重置背景位置和定时器
+- (void)recover{
+    self.isAppear = YES;
+    //启动需要时间，应设置比动画时间长，否则有可能会图像越界
+    self.timer = [XYWeakTimerTargetObj scheduledTimerWithTimeInterval:16 target:self selector:@selector(scrollScrollViewIsRecover:) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    [self scrollScrollViewIsRecover:YES];
 }
+
 
 #pragma mark -- 背景平移动画
 - (void)scrollScrollViewIsRecover:(BOOL)isRecover
@@ -243,7 +247,7 @@ static XYLoginViewController *_instance = nil;
 /*
  发送验证码
  */
--(void)sendSMS{
+- (void)sendSMS{
 #warning needTODO:发送验证码代码填写处
     [SVProgressHUD showSuccessWithStatus:@"发送成功"];
 }
@@ -260,11 +264,11 @@ static XYLoginViewController *_instance = nil;
     [self userInteractionIsAllow:NO];
     [self startLoading:sender];
     //延时执行点击后操作，为确保动画完成一点样子，不需要的话，可以直接执行方法
-    [self performSelector:@selector(loginOperation) withObject:nil afterDelay:1.2];
+    [self performSelector:@selector(loginButtonActions) withObject:nil afterDelay:1.2];
     
 }
 
-- (void)loginOperation{
+- (void)loginButtonActions {
     if (self.currentStyle == XYLoginViewStyleRegister) {
         //注册模式
         if([self phoneNumCheck]) { //有效手机号
@@ -293,15 +297,9 @@ static XYLoginViewController *_instance = nil;
             [self showLogin:self.login];
             return;
         }
-#warning needTODO:对接服务器，进行登录操作
-#warning needTODO:在网络操作中，如果没有网络，即收到服务器的数据为nil，需要做空判断以防崩溃，同时回收按钮动画，例如下面代码，obj为服务器返回的二进制数据
-        /*
-         if (obj==nil) {
-         [SVProgressHUD showErrorWithStatus:@"网络异常,请重试"];
-         [self showLogin:self.login];//回收动画，回到原型
-         return;
-         }
-         */
+        
+        [self onLogin];
+     
     }else{
         //忘记密码模式
         if([self phoneNumCheck]) { //有效手机号
@@ -595,4 +593,20 @@ static XYLoginViewController *_instance = nil;
     return YES;
 }
 
+
+#pragma mark -- Login actions
+
+- (void)onLogin {
+    __weak typeof(self) weakSelf = self;
+    [XYAccountAuth loginWithMobile:self.phoneNum.text password:self.pwdAndAuth.text completionHandler:^(NSURLSessionDataTask * _Nonnull task, XYUser * _Nullable user, NSError * _Nullable error) {
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+            [weakSelf showLogin:weakSelf.login];//回收动画，回到原型
+        }
+        else {
+            [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
+            [weakSelf backToSuperVC:nil];
+        }
+    }];
+}
 @end
