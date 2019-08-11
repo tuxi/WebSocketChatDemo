@@ -18,6 +18,8 @@
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define kAccount @"account"
 
+NSNotificationName const kLoginSuccessNotification = @"kLoginSuccess";
+
 @interface XYLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *phoneNum;
 @property (weak, nonatomic) IBOutlet UITextField *pwdAndAuth;
@@ -27,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *phoneRegist;
 @property (weak, nonatomic) IBOutlet UIScrollView *backScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *changePwdBtn;
+@property (weak, nonatomic) IBOutlet UIButton *closeButon;
 @property (weak, nonatomic) UIButton *maskBtn;
 @property (nonatomic,weak) NSTimer *timer;//定时器
 @property (nonatomic,assign) XYLoginViewStyle currentStyle;
@@ -49,7 +52,7 @@ static XYLoginViewController *_instance = nil;
     return _instance;
 }
 
-- (void)showWithStyle:(XYLoginViewStyle)style animated:(BOOL)animated superController:(UIViewController *)superVC {
+- (void)showWithStyle:(XYLoginViewStyle)style animated:(BOOL)animated closeable:(BOOL)closeable superController:(nonnull UIViewController *)superVC {
     self.currentStyle = style;
     UIView *aView = [UIApplication sharedApplication].delegate.window;
     self.superVC = superVC;
@@ -74,6 +77,7 @@ static XYLoginViewController *_instance = nil;
         self.view.frame = CGRectMake(0, kLoginViewHeightOffset, kScreenWidth, kScreenHeight - kLoginViewHeightOffset + 20);
         self.superVC.view.transform = CGAffineTransformMakeScale(0.95, 0.95);
     }
+    self.closeButon.hidden = !closeable;
 }
 
 //的在XIB布局后才能改变视图结构，不然会被XIB改回去
@@ -270,8 +274,8 @@ static XYLoginViewController *_instance = nil;
 
 - (void)loginButtonActions {
     if (self.currentStyle == XYLoginViewStyleRegister) {
-        //注册模式
-        if([self phoneNumCheck]) { //有效手机号
+        // 注册模式
+        if ([self phoneNumCheck]) { //有效手机号
             if (self.registPwd.text.length > 5 && self.registPwd.text.length < 16) {
                 //验证验证码
                 [self verifySMS];
@@ -280,12 +284,14 @@ static XYLoginViewController *_instance = nil;
                 [self showLogin:self.login];
                 return;
             }
-        }else {
+        }
+        else {
             [SVProgressHUD showInfoWithStatus:@"手机号不正确"];
             [self showLogin:self.login];
             return;
         }
-    }else if(self.currentStyle == XYLoginViewStyleLogin){
+    }
+    else if (self.currentStyle == XYLoginViewStyleLogin){
         //登录模式
         if (self.phoneNum.text.length == 0) {
             [SVProgressHUD showErrorWithStatus:@"请输入账号"];
@@ -300,7 +306,8 @@ static XYLoginViewController *_instance = nil;
         
         [self onLogin];
      
-    }else{
+    }
+    else {
         //忘记密码模式
         if([self phoneNumCheck]) { //有效手机号
             [self verifySMS];
@@ -312,7 +319,7 @@ static XYLoginViewController *_instance = nil;
 }
 
 //开始按钮动画效果
--(void)startLoading:(UIButton *)sender{
+- (void)startLoading:(UIButton *)sender{
     sender.alpha = 0;
     self.deformation = [[DeformationButton alloc]initWithFrame:sender.frame];
     [self.deformation.forDisplayButton setTitle:sender.titleLabel.text forState:UIControlStateNormal];
@@ -478,8 +485,8 @@ static XYLoginViewController *_instance = nil;
     }
 }
 
--(IBAction)changePwd:(id)sender{
-    //其他按钮的交互取消
+- (IBAction)changePwd:(id)sender{
+    // 其他按钮的交互取消
     [self userInteractionIsAllow:NO];
     [self startLoading:sender];
     //延时执行点击后操作，为确保动画完成
@@ -554,9 +561,8 @@ static XYLoginViewController *_instance = nil;
     
 }
 
-//登录成功处理
-- (void)loginSuccess:(NSString *)uid name:(NSString *)name iconurl:(NSString *)iconurl grade:(NSString *)grade purview:(NSNumber *)purview from:(NSString *)from phone:(NSString *)phone wechat:(NSString *)wechat{
-#warning needTODO:用户信息保存到本地沙盒，根据自己需求操作
+// 登录成功处理
+- (void)loginSuccess {
     
     [SVProgressHUD showSuccessWithStatus:@"登录成功"];
     //清空文本框内容
@@ -566,7 +572,7 @@ static XYLoginViewController *_instance = nil;
     [self.deformation stopLoading];
     self.deformation.alpha = 0;
     //2.发送通知外界更新
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"loginSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kLoginSuccessNotification object:self];
     //3.退出该窗口
     [self backToSuperVC:nil];
 }
@@ -604,8 +610,7 @@ static XYLoginViewController *_instance = nil;
             [weakSelf showLogin:weakSelf.login];//回收动画，回到原型
         }
         else {
-            [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
-            [weakSelf backToSuperVC:nil];
+            [weakSelf loginSuccess];
         }
     }];
 }

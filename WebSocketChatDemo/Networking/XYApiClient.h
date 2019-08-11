@@ -11,12 +11,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*
+ API 文档: https://chat.enba.com/api/docs/
+ */
 
 @interface XYApiClient : NSObject
 
 // 获取我的对话列表
 // @param page 从1开始
 + (NSURLSessionDataTask *)getMyDialogsWithPage:(NSInteger)page completionHandler:(void (^ _Nullable )(NSURLSessionDataTask * _Nullable task, XYApiClientResponse * _Nullable response, NSError *_Nullable error))completion;
+
++ (NSURLSessionDataTask *)getMessagesByDialogId:(NSInteger)dialogId page:(NSInteger)page completionHandler:(void (^ _Nullable )(NSURLSessionDataTask * _Nullable task, XYApiClientResponse * _Nullable response, NSError *_Nullable error))completion;
 
 @end
 

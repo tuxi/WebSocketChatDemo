@@ -14,6 +14,7 @@
                 <outlet property="QQIcon" destination="CHd-aM-ZDL" id="YCb-LO-SpM"/>
                 <outlet property="backScrollView" destination="pFJ-AG-Xoa" id="J3U-jD-CmZ"/>
                 <outlet property="changePwdBtn" destination="0uw-oz-Sfl" id="Q6w-3K-v3T"/>
+                <outlet property="closeButon" destination="L7N-ai-Kvy" id="FD0-ha-84Z"/>
                 <outlet property="forgetAndAuth" destination="A1p-Uh-sc5" id="kOF-RI-wrg"/>
                 <outlet property="logLabel" destination="XUg-Tf-kcE" id="aiv-fD-m8G"/>
                 <outlet property="login" destination="Mal-Fn-YeK" id="LeD-r2-jhV"/>

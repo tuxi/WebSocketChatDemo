@@ -26,7 +26,7 @@
     
     if ([XYAuthenticationManager manager].user == nil) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[XYLoginViewController sharedInstance] showWithStyle:XYLoginViewStyleLogin animated:NO superController:viewController];
+            [[XYLoginViewController sharedInstance] showWithStyle:XYLoginViewStyleLogin animated:NO closeable:NO superController:viewController];
         });
     }
     

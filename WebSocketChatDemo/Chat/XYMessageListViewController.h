@@ -6,11 +6,14 @@
 //  Copyright © 2019 xiaoyuan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <JSQMessagesViewController/JSQMessagesViewController.h>
+#import "XYDialog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XYMessageListViewController : UIViewController
+@interface XYMessageListViewController : JSQMessagesViewController
+
+- (instancetype)initWithDialog:(XYDialog *)dialog;
 
 @end
 

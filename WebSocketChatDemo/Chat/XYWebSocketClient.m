@@ -8,14 +8,18 @@
 
 #import "XYWebSocketClient.h"
 #import <SRWebSocket.h>
+#import "XYAuthenticationManager.h"
 
+//static NSString *const kBaseHost = @"ws://10.211.55.4/ws";
+static NSString *const kBaseHost = @"wss://chat.enba.com/ws";
 @interface XYWebSocketClient () <SRWebSocketDelegate>
 
 @property (nonatomic, strong) SRWebSocket *socket;
 // 重连定时器
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, assign) BOOL isUserStop;
 @property (nonatomic, copy) void (^ receiveMessageCallback)(id message);
+@property (nonatomic, assign) NSInteger reconnectCount;
+@property (nonatomic, copy) NSString *opponent;
 
 @end
 
@@ -32,25 +36,69 @@
 
 #pragma mark - Public methods
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _maxReconnectCount = 5;
+        _overtime = 10;
+        _reconnectCount = 0;
+    }
+    return self;
+}
+
 
 // 连接websocket服务器
-- (void)startWithHost:(NSURL *)host {
-    self.socket = [[SRWebSocket alloc] initWithURL:host];
+- (void)openWithOpponent:(NSString *)username {
+    
+    // 开启成功后重置重连计数器
+    _reconnectCount = 0;
+    self.opponent = username;
+    [self open];
+}
+
+- (void)open {
+    [self.socket close];
+    self.socket.delegate = nil;
+    NSString *wssHostStr = [NSString stringWithFormat:@"%@/%@/%@", kBaseHost,  [XYAuthenticationManager manager].sessionId, self.opponent];
+    NSURL *url = [NSURL URLWithString:wssHostStr];
+    self.socket = [[SRWebSocket alloc] initWithURLRequest:[[NSURLRequest alloc] initWithURL:url]];
     self.socket.delegate = self;
+    
     [self.socket open];
+    //    self.socket sendPing:<#(NSData *)#>
+    //    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    //    queue.maxConcurrentOperationCount = 1;
+    //    [self.socket setDelegateOperationQueue:queue];
 }
 
 // 结束连接
-- (void)stop {
-    self.isUserStop = YES;
-    [self.timer invalidate];
-    self.timer = nil;
+- (void)close {
+    
     [self.socket close];
     self.socket = nil;
+    [self.timer invalidate];
+    self.timer = nil;
+    self.status = XYSocketStatusClosedByUser;
 }
 
-- (void)onReceiveMessageCallback:(void (^)(id _Nonnull))callback {
-    self.receiveMessageCallback = callback;
+- (void)sendMessage:(NSString *)message {
+    switch (self.status) {
+        case XYSocketStatusConnected: {
+            NSLog(@"发送中。。。");
+            [self sendMessageToOpponent:self.opponent message:message];
+            break;
+        }
+        case XYSocketStatusFailed:
+            NSLog(@"发送失败");
+            break;
+        case XYSocketStatusClosedByServer:
+            NSLog(@"已经关闭");
+            break;
+        case XYSocketStatusClosedByUser:
+            NSLog(@"已经关闭");
+            break;
+    }
 }
 
 - (void)sendMessageToOpponent:(NSString *)username message:(NSString *)message {
@@ -61,15 +109,46 @@
     [self.socket send:jsonstr];
 }
 
+- (void)checkOnlineWithOpponent:(NSString *)username {
+    NSDictionary *dict = @{
+        @"type": @"check-online",
+        @"session_key": [XYAuthenticationManager manager].sessionId,
+        @"username": username
+    };
+    
+    NSString *jsonStr = [self jsonWithDict:dict];
+    [self.socket send:jsonStr];
+}
+
 #pragma mark - Private methods
 
+- (void)onReceiveMessageCallback:(void (^)(id _Nonnull))callback {
+    self.receiveMessageCallback = callback;
+}
 
 // 重新连接websocket服务器，对断线做处理
-- (void)restart {
-    if (self.socket && self.socket.readyState != SR_OPEN) {
+- (void)reconnect {
+    
+    BOOL isLogin = [[XYAuthenticationManager manager] isLogin];
+    if (!isLogin) {
         [self.timer invalidate];
         self.timer = nil;
-        [self.socket open];
+        [self.socket close];
+        return;
+    }
+    // 计数+1
+    if (_reconnectCount < self.maxReconnectCount - 1 && self.status != XYSocketStatusClosedByUser) {
+        _reconnectCount ++;
+        // 开启定时器
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.overtime target:self selector:@selector(open) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+        self.timer = timer;
+    }
+    else{
+        if (self.timer) {
+            [self.timer invalidate];
+            self.timer = nil;
+        }
     }
 }
 
@@ -83,13 +162,17 @@
     // 根据服务端制定的规范，发送消息
     NSDictionary *data = @{
                            @"type":@"new-message",
-                           @"session_key":@"4yrbho3819sb55q9fzhcr786wz1u2zc0",
-                           @"username":@"user_1",
+                           @"session_key": [XYAuthenticationManager manager].sessionId,
+                           @"username": username,
                            @"message":text
                            };
     
+    return [self jsonWithDict:data];
+}
+
+- (NSString *)jsonWithDict:(NSDictionary *)dict {
     NSError  *parseError = nil;
-    NSData   *jsonData   = [NSJSONSerialization dataWithJSONObject:data options:0 error:&parseError];
+    NSData   *jsonData   = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&parseError];
     if (parseError) {
         return nil;
     }
@@ -102,20 +185,14 @@
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
     NSLog(@"已连接");
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(restart) userInfo:nil repeats:YES];
-    [self.timer fire];
+    self.status = XYSocketStatusConnected;
 }
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
     NSLog(@"连接失败");
-    if (self.isUserStop == NO) {
-        // 服务器掉线，重连
-        [self restart];
-    }
-    else {
-        // 如果由用户断开，不进行重连
-        return;
-    }
+    self.status = XYSocketStatusFailed;
+    // 重连
+    [self reconnect];
 }
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
 {
@@ -133,6 +210,12 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
-    NSLog(@"连接关闭");
+    NSLog(@" 长连接关闭");
+    self.status = XYSocketStatusClosedByServer;
+    [self reconnect];
 }
+- (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload {
+    NSLog(@"接收到服务器发送的pong消息");
+}
+
 @end

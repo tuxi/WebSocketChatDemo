@@ -12,6 +12,7 @@
 
 
 NSString * const kBaseURLString = @"https://chat.enba.com/api";
+//NSString * const kBaseURLString = @"http://10.211.55.4/api";
 
 @implementation XYAccountAuth
 
@@ -20,16 +21,21 @@ NSString * const kBaseURLString = @"https://chat.enba.com/api";
     NSString *url = [NSString stringWithFormat:@"%@/login/", kBaseURLString];
     
     NSDictionary *parameters = @{@"mobile": mobile, @"password": password};
-    
-    return [[AFHTTPSessionManager manager] POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    // 忽略缓存
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    return [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) {
             NSHTTPURLResponse *response = (id)task.response;
             if (response.statusCode == 200) {
                 NSDictionary *userDict = responseObject[@"user"];
                 NSString *token = responseObject[@"token"];
+                NSString *sessionid = responseObject[@"sessionid"];
                 XYUser *user = [[XYUser alloc] initWithDict:userDict];
                 [[XYAuthenticationManager manager] setUser:user];
                 [[XYAuthenticationManager manager] setAuthToken:token];
+                [[XYAuthenticationManager manager] setSessionId:sessionid];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (user && token) {
                         completion(task, user, nil);

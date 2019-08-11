@@ -13,11 +13,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XYAuthenticationManager : NSObject
 
-@property (nonatomic, copy) NSString *authToken;
-@property (nonatomic, strong) XYUser *user;
+// 用于接口请求的授权
+@property (nonatomic, copy, nullable) NSString *authToken;
+// 用作websocket与服务器连接
+@property (nonatomic, copy, nullable) NSString *sessionId;
+// 记录当前登陆的用户
+@property (nonatomic, strong, nullable) XYUser *user;
+// 是否登陆
 @property (nonatomic, assign, readonly) BOOL isLogin;
 
 + (instancetype)manager;
+
+// 退出登陆需要清空用户
+- (void)logout;
 
 @end
 

@@ -10,6 +10,8 @@
 #import "XYDialogListViewModel.h"
 #import <MJRefresh.h>
 #import "XYMessageListViewController.h"
+#import "XYAuthenticationManager.h"
+#import "XYLoginViewController.h"
 
 @interface XYDialogListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -26,7 +28,9 @@
     
     [self setupUI];
     [self setupHeaderRefresh];
-    [self.tableView.mj_header beginRefreshing];
+    if ([XYAuthenticationManager manager].isLogin) {
+        [self.tableView.mj_header beginRefreshing];
+    }
 }
 
 - (void)setupUI {
@@ -39,6 +43,8 @@
     [self.tableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor].active = YES;
     [self.tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
     [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"退出" style:UIBarButtonItemStyleDone target:self action:@selector(logout)];
 }
 
 - (void)setupHeaderRefresh {
@@ -60,6 +66,10 @@
         [weakSelf getDataFromServer:YES];
     }];
                                 
+}
+
+- (void)addObserver {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:kLoginSuccessNotification object:nil];
 }
 
 - (void)getDataFromServer:(BOOL)isMore {
@@ -88,6 +98,17 @@
     
 }
 
+#pragma mark - Actions
+
+- (void)logout {
+    [[XYAuthenticationManager manager] logout];
+    [[XYLoginViewController sharedInstance] showWithStyle:XYLoginViewStyleLogin animated:YES closeable:NO superController:self];
+}
+
+- (void)loginSuccess {
+    [self.tableView.mj_header beginRefreshing];
+}
+
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -95,16 +116,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.viewModel.dialogs.count;
+    return self.viewModel.data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"XYDialogTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *const kCellIdentifier = @"XYDialogTableViewCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:kCellIdentifier];
     }
-    XYDialog *model = self.viewModel.dialogs[indexPath.row];
+    XYDialog *model = self.viewModel.data[indexPath.row];
     cell.textLabel.text = model.opponent.username;
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"last message: %@", model.modified];
@@ -113,7 +134,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    XYMessageListViewController *vc = [[XYMessageListViewController alloc] init];
+    XYMessageListViewController *vc = [[XYMessageListViewController alloc] initWithDialog:self.viewModel.data[indexPath.row]];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

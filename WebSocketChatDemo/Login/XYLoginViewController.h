@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, XYLoginViewStyle) {
     XYLoginViewStyleChangePassword,
 };
 
+FOUNDATION_EXPORT NSNotificationName const kLoginSuccessNotification;
+
 
 @interface XYLoginViewController : UIViewController
 
@@ -30,7 +32,7 @@ typedef NS_ENUM(NSInteger, XYLoginViewStyle) {
 // 显示登陆控制器
 // @param style 登陆控制器的view样式
 // @parma superVC 登陆控制器的父控制器
-- (void)showWithStyle:(XYLoginViewStyle)style animated:(BOOL)animated superController:(UIViewController *)superVC;
+- (void)showWithStyle:(XYLoginViewStyle)style animated:(BOOL)animated closeable:(BOOL)closeable superController:(UIViewController *)superVC;
 
 @end
 

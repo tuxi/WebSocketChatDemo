@@ -36,6 +36,7 @@
 		D26D55A922FFCB7A00C6DDAF /* XYDialogListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55A822FFCB7A00C6DDAF /* XYDialogListViewModel.m */; };
 		D26D55AC22FFCC2400C6DDAF /* XYApiClientResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55AB22FFCC2400C6DDAF /* XYApiClientResponse.m */; };
 		D26D55AF22FFD72200C6DDAF /* XYMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55AE22FFD72200C6DDAF /* XYMessageListViewController.m */; };
+		D26D55B222FFDED600C6DDAF /* XYMessageListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55B122FFDED600C6DDAF /* XYMessageListViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,8 @@
 		D26D55AB22FFCC2400C6DDAF /* XYApiClientResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYApiClientResponse.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYApiClientResponse.m; sourceTree = "<group>"; };
 		D26D55AD22FFD72200C6DDAF /* XYMessageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYMessageListViewController.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMessageListViewController.h; sourceTree = "<group>"; };
 		D26D55AE22FFD72200C6DDAF /* XYMessageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYMessageListViewController.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMessageListViewController.m; sourceTree = "<group>"; };
+		D26D55B022FFDED600C6DDAF /* XYMessageListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYMessageListViewModel.h; sourceTree = "<group>"; };
+		D26D55B122FFDED600C6DDAF /* XYMessageListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYMessageListViewModel.m; sourceTree = "<group>"; };
 		EF2B6BDF09F7F3F19E55B6D8 /* Pods-WebSocketChatDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSocketChatDemo.debug.xcconfig"; path = "Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -226,6 +229,8 @@
 				D26D55A822FFCB7A00C6DDAF /* XYDialogListViewModel.m */,
 				D26D55AD22FFD72200C6DDAF /* XYMessageListViewController.h */,
 				D26D55AE22FFD72200C6DDAF /* XYMessageListViewController.m */,
+				D26D55B022FFDED600C6DDAF /* XYMessageListViewModel.h */,
+				D26D55B122FFDED600C6DDAF /* XYMessageListViewModel.m */,
 			);
 			name = Chat;
 			path = ../../../../../../../../../Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat;
@@ -399,6 +404,7 @@
 				D24BC6CC22FEDB9C000F905D /* XYDialogListViewController.m in Sources */,
 				D24BC6D022FEE3B3000F905D /* XYAccountAuth.m in Sources */,
 				D24BC6D322FEE43E000F905D /* XYUser.m in Sources */,
+				D26D55B222FFDED600C6DDAF /* XYMessageListViewModel.m in Sources */,
 				D24BC6C122FE9B5E000F905D /* FBShimmeringLayer.m in Sources */,
 				D26D55A922FFCB7A00C6DDAF /* XYDialogListViewModel.m in Sources */,
 				D24BC69122FE98B2000F905D /* main.m in Sources */,

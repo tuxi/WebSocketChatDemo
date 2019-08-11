@@ -44,19 +44,19 @@
                 self.page += 1;
             }
             if (!isMore) {
-                [self.dialogs removeAllObjects];
+                [self.data removeAllObjects];
             }
-            [self.dialogs addObjectsFromArray:response.results];
+            [self.data addObjectsFromArray:response.results];
             completion(response.results, nil);
         }
     }];
 }
 
-- (NSMutableArray<XYDialog *> *)dialogs {
-    if (!_dialogs) {
-        _dialogs = [NSMutableArray arrayWithCapacity:3];
+- (NSMutableArray<XYDialog *> *)data {
+    if (!_data) {
+        _data = [NSMutableArray arrayWithCapacity:3];
     }
-    return _dialogs;
+    return _data;
 }
 
 @end
