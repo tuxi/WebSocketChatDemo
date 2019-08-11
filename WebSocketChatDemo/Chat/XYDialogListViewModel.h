@@ -7,12 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XYDialog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XYDialogListViewModel : NSObject
 
+@property (nonatomic, assign) NSInteger page;
+@property (nonatomic, assign) BOOL hasMore;
+@property (nonatomic, strong) NSMutableArray<XYDialog *> *dialogs;
 
+- (void)getMyDialogsWithIsMore:(BOOL)isMore completionHandler:(void (^ _Nullable )(NSArray<XYDialog *> *_Nullable dialogs, NSError *_Nullable error))completion;
 
 @end
 

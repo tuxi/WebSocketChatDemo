@@ -34,6 +34,8 @@
 		D24BC6D922FEEBA5000F905D /* XYAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6D822FEEBA5000F905D /* XYAuthenticationManager.m */; };
 		D24BC6DC22FEF593000F905D /* XYMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6DB22FEF593000F905D /* XYMainNavigationController.m */; };
 		D26D55A922FFCB7A00C6DDAF /* XYDialogListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55A822FFCB7A00C6DDAF /* XYDialogListViewModel.m */; };
+		D26D55AC22FFCC2400C6DDAF /* XYApiClientResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55AB22FFCC2400C6DDAF /* XYApiClientResponse.m */; };
+		D26D55AF22FFD72200C6DDAF /* XYMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55AE22FFD72200C6DDAF /* XYMessageListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,10 @@
 		D24BC6DB22FEF593000F905D /* XYMainNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYMainNavigationController.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMainNavigationController.m; sourceTree = "<group>"; };
 		D26D55A722FFCB7A00C6DDAF /* XYDialogListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYDialogListViewModel.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYDialogListViewModel.h; sourceTree = "<group>"; };
 		D26D55A822FFCB7A00C6DDAF /* XYDialogListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYDialogListViewModel.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYDialogListViewModel.m; sourceTree = "<group>"; };
+		D26D55AA22FFCC2400C6DDAF /* XYApiClientResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYApiClientResponse.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYApiClientResponse.h; sourceTree = "<group>"; };
+		D26D55AB22FFCC2400C6DDAF /* XYApiClientResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYApiClientResponse.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYApiClientResponse.m; sourceTree = "<group>"; };
+		D26D55AD22FFD72200C6DDAF /* XYMessageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYMessageListViewController.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMessageListViewController.h; sourceTree = "<group>"; };
+		D26D55AE22FFD72200C6DDAF /* XYMessageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYMessageListViewController.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMessageListViewController.m; sourceTree = "<group>"; };
 		EF2B6BDF09F7F3F19E55B6D8 /* Pods-WebSocketChatDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSocketChatDemo.debug.xcconfig"; path = "Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,6 +224,8 @@
 				D229CBD822FFBFBC0047B2FD /* XYMessage.m */,
 				D26D55A722FFCB7A00C6DDAF /* XYDialogListViewModel.h */,
 				D26D55A822FFCB7A00C6DDAF /* XYDialogListViewModel.m */,
+				D26D55AD22FFD72200C6DDAF /* XYMessageListViewController.h */,
+				D26D55AE22FFD72200C6DDAF /* XYMessageListViewController.m */,
 			);
 			name = Chat;
 			path = ../../../../../../../../../Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat;
@@ -230,6 +238,8 @@
 				D24BC6CF22FEE3B3000F905D /* XYAccountAuth.m */,
 				D229CBD122FFBEA30047B2FD /* XYApiClient.h */,
 				D229CBD222FFBEA30047B2FD /* XYApiClient.m */,
+				D26D55AA22FFCC2400C6DDAF /* XYApiClientResponse.h */,
+				D26D55AB22FFCC2400C6DDAF /* XYApiClientResponse.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -358,6 +368,7 @@
 				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesLoadEarlierHeaderView.xib",
 				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesToolbarContentView.xib",
 				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesTypingIndicatorFooterView.xib",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
@@ -370,6 +381,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesLoadEarlierHeaderView.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesToolbarContentView.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesTypingIndicatorFooterView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -392,9 +404,11 @@
 				D24BC69122FE98B2000F905D /* main.m in Sources */,
 				D24BC68322FE98AE000F905D /* AppDelegate.m in Sources */,
 				D24BC6BF22FE9B5E000F905D /* SVIndefiniteAnimatedView.m in Sources */,
+				D26D55AF22FFD72200C6DDAF /* XYMessageListViewController.m in Sources */,
 				D229CBD922FFBFBC0047B2FD /* XYMessage.m in Sources */,
 				D24BC6C822FEA297000F905D /* XYWeakTimerTargetObj.m in Sources */,
 				D24BC6C222FE9B5E000F905D /* FBShimmeringView.m in Sources */,
+				D26D55AC22FFCC2400C6DDAF /* XYApiClientResponse.m in Sources */,
 				D229CBD622FFBFA90047B2FD /* XYDialog.m in Sources */,
 				D24BC6BE22FE9B5E000F905D /* SVProgressHUD.m in Sources */,
 				D24BC6DC22FEF593000F905D /* XYMainNavigationController.m in Sources */,

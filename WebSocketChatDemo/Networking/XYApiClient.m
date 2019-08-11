@@ -9,12 +9,13 @@
 #import "XYApiClient.h"
 #import "XYAuthenticationManager.h"
 #import <AFNetworking.h>
+#import "XYDialog.h"
 
 extern NSString * const kBaseURLString;
 
 @implementation XYApiClient
 
-+ (NSURLSessionDataTask *)getMyDialogsWithCompletionHandler:(void (^)(NSURLSessionDataTask * _Nullable, XYApiClientResponse * _Nullable, NSError * _Nullable))completion {
++ (NSURLSessionDataTask *)getMyDialogsWithPage:(NSInteger)page completionHandler:(void (^)(NSURLSessionDataTask * _Nullable, XYApiClientResponse * _Nullable, NSError * _Nullable))completion {
     
     if ([XYAuthenticationManager manager].isLogin == NO) {
         if (completion) {
@@ -24,6 +25,7 @@ extern NSString * const kBaseURLString;
         return nil;
     }
     
+    page = MAX(1, page);
     NSString *url = [NSString stringWithFormat:@"%@/dialog/", kBaseURLString];
     
     // 将jwt传递给服务端，用于身份验证
@@ -32,7 +34,7 @@ extern NSString * const kBaseURLString;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
     
-    return [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    return [manager GET:url parameters:@{@"page": @(page)} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) {
             NSHTTPURLResponse *response = (id)task.response;
             if (response.statusCode == 200) {
@@ -50,48 +52,19 @@ extern NSString * const kBaseURLString;
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (completion) {
-            completion(task, nil, error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSHTTPURLResponse *response = (id)task.response;
+                if (response.statusCode == 404) {
+                    // 处理page 超出范围的Invalid page 问题
+                    XYApiClientResponse *rs = [XYApiClientResponse new];
+                    completion(task, rs, nil);
+                }
+                else {
+                    completion(task, nil, error);
+                }
+            });
         }
     }];
 }
-
-@end
-
-
-@implementation XYApiClientResponse {
-    Class _contentClass;
-}
-
-- (instancetype)initWithDict:(NSDictionary *)dict resultClass:(nonnull Class)rsClass {
-    if (self = [super init]) {
-        _contentClass = rsClass;
-        [self setValuesForKeysWithDictionary:dict];
-    }
-    return self;
-}
-
-
-- (void)setValue:(id)value forKey:(NSString *)key {
-    if ([key isEqualToString:@"results"]) {
-        if (![value isKindOfClass:[NSArray class]]) {
-            value = nil;
-        }
-        else {
-            NSMutableArray *contents = [NSMutableArray arrayWithCapacity:[value count]];
-            Class content_class = _contentClass;
-            [(NSArray *)value enumerateObjectsUsingBlock:^(id  _Nonnull dict, NSUInteger idx, BOOL * _Nonnull stop) {
-                id content = [[content_class alloc] init];
-                [content setValuesForKeysWithDictionary:dict];
-                [contents addObject:content];
-            }];
-            value = contents;
-        }
-    }
-    [super setValue:value forKey:key];
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key {}
-
-- (void)setNilValueForKey:(NSString *)key {}
 
 @end

@@ -9,4 +9,5 @@ target 'WebSocketChatDemo' do
   pod 'JSQMessagesViewController'
   pod 'SocketRocket', '~> 0.5'
   pod 'AFNetworking', '~> 3.0'
+  pod 'MJRefresh'
 end

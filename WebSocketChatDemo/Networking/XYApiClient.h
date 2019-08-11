@@ -7,26 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "XYDialog.h"
-#import "XYMessage.h"
+#import "XYApiClientResponse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XYApiClientResponse : NSObject
-
-@property (nonatomic, assign) NSInteger count;
-@property (nonatomic, assign) NSInteger next;
-@property (nonatomic, assign) NSInteger previous;
-@property (nonatomic, strong) NSArray *results;
-
-- (instancetype)initWithDict:(NSDictionary *)dict resultClass:(Class)rsClass;
-
-@end
 
 @interface XYApiClient : NSObject
 
 // 获取我的对话列表
-+ (NSURLSessionDataTask *)getMyDialogsWithCompletionHandler:(void (^ _Nullable )(NSURLSessionDataTask * _Nullable task, XYApiClientResponse * _Nullable response, NSError *_Nullable error))completion;
+// @param page 从1开始
++ (NSURLSessionDataTask *)getMyDialogsWithPage:(NSInteger)page completionHandler:(void (^ _Nullable )(NSURLSessionDataTask * _Nullable task, XYApiClientResponse * _Nullable response, NSError *_Nullable error))completion;
 
 @end
 
