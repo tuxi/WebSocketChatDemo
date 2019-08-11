@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "XYMainNavigationController.h"
-#import "XYChatListViewController.h"
+#import "XYDialogListViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,7 +22,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    self.window.rootViewController = [[XYMainNavigationController alloc] initWithRootViewController:[XYChatListViewController new]];
+    self.window.rootViewController = [[XYMainNavigationController alloc] initWithRootViewController:[XYDialogListViewController new]];
     
     [self.window makeKeyAndVisible];
     

@@ -11,7 +11,7 @@
 #import "XYAuthenticationManager.h"
 
 
-static NSString * kBaseURLString = @"https://chat.enba.com";
+NSString * const kBaseURLString = @"https://chat.enba.com/api";
 
 @implementation XYAccountAuth
 

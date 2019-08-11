@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *authToken;
 @property (nonatomic, strong) XYUser *user;
+@property (nonatomic, assign, readonly) BOOL isLogin;
 
 + (instancetype)manager;
 

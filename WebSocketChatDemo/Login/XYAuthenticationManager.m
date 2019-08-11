@@ -54,4 +54,8 @@ static NSString * const kAuthUserKey = @"auth_user";
     return _user;
 }
 
+- (BOOL)isLogin {
+    return self.authToken.length && self.user;
+}
+
 @end
