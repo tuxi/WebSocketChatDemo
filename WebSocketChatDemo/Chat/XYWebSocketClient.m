@@ -111,7 +111,7 @@
 - (void)checkOnlineWithOpponent:(NSString *)username {
     NSDictionary *dict = @{
         @"type": @"check-online",
-        @"jwt_token": [XYAuthenticationManager manager].authToken,
+        kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
         @"username": username
     };
     

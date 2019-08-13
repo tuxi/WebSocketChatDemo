@@ -17,4 +17,4 @@ NSString * const kBaseURLString = @"http://127.0.0.1:8000/api";
 NSString *const kWebSocketHost = @"ws://127.0.0.1:5002";
 //NSString *const kWebSocketHost = @"wss://chat.enba.com/ws";
 
-NSString * const kWebSocketTokenKey = @"jwt_token";
+NSString * const kWebSocketTokenKey = @"token";
