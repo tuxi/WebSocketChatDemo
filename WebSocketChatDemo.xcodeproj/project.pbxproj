@@ -37,7 +37,7 @@
 		D24BC6C122FE9B5E000F905D /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B622FE9B5E000F905D /* FBShimmeringLayer.m */; };
 		D24BC6C222FE9B5E000F905D /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B722FE9B5E000F905D /* FBShimmeringView.m */; };
 		D24BC6C322FE9B5E000F905D /* DeformationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B922FE9B5E000F905D /* DeformationButton.m */; };
-		D24BC6C822FEA297000F905D /* XYWeakTimerTargetObj.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */; };
+		D24BC6C822FEA297000F905D /* XYSafeTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6C722FEA297000F905D /* XYSafeTimer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,8 +102,8 @@
 		D24BC6B722FE9B5E000F905D /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
 		D24BC6B822FE9B5E000F905D /* MMMaterialDesignSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMaterialDesignSpinner.h; path = WebSocketChatDemo/Extra/MMMaterialDesignSpinner.h; sourceTree = SOURCE_ROOT; };
 		D24BC6B922FE9B5E000F905D /* DeformationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeformationButton.m; path = WebSocketChatDemo/Extra/DeformationButton.m; sourceTree = SOURCE_ROOT; };
-		D24BC6C622FEA297000F905D /* XYWeakTimerTargetObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYWeakTimerTargetObj.h; path = WebSocketChatDemo/Extra/XYWeakTimerTargetObj.h; sourceTree = SOURCE_ROOT; };
-		D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYWeakTimerTargetObj.m; path = WebSocketChatDemo/Extra/XYWeakTimerTargetObj.m; sourceTree = SOURCE_ROOT; };
+		D24BC6C622FEA297000F905D /* XYSafeTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYSafeTimer.h; path = WebSocketChatDemo/Extra/XYSafeTimer.h; sourceTree = SOURCE_ROOT; };
+		D24BC6C722FEA297000F905D /* XYSafeTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYSafeTimer.m; path = WebSocketChatDemo/Extra/XYSafeTimer.m; sourceTree = SOURCE_ROOT; };
 		EF2B6BDF09F7F3F19E55B6D8 /* Pods-WebSocketChatDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSocketChatDemo.debug.xcconfig"; path = "Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,8 +211,8 @@
 				D24BC6B822FE9B5E000F905D /* MMMaterialDesignSpinner.h */,
 				D24BC6A422FE9B5E000F905D /* MMMaterialDesignSpinner.m */,
 				D24BC6A522FE9B5E000F905D /* SVProgressHUD */,
-				D24BC6C622FEA297000F905D /* XYWeakTimerTargetObj.h */,
-				D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */,
+				D24BC6C622FEA297000F905D /* XYSafeTimer.h */,
+				D24BC6C722FEA297000F905D /* XYSafeTimer.m */,
 			);
 			name = Extra;
 			path = ../../../../../../../../../Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Extra;
@@ -409,7 +409,7 @@
 				D24BC68322FE98AE000F905D /* AppDelegate.m in Sources */,
 				D24BC6BF22FE9B5E000F905D /* SVIndefiniteAnimatedView.m in Sources */,
 				D0F4360423025BFE00102335 /* XYApiClient.m in Sources */,
-				D24BC6C822FEA297000F905D /* XYWeakTimerTargetObj.m in Sources */,
+				D24BC6C822FEA297000F905D /* XYSafeTimer.m in Sources */,
 				D24BC6C222FE9B5E000F905D /* FBShimmeringView.m in Sources */,
 				D0F4361823025C0E00102335 /* XYDialog.m in Sources */,
 				D24BC6BE22FE9B5E000F905D /* SVProgressHUD.m in Sources */,

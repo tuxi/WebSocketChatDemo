@@ -9,7 +9,7 @@
 #import "XYLoginViewController.h"
 #import "FBShimmeringView.h"
 #import "DeformationButton.h"
-#import "XYWeakTimerTargetObj.h"
+#import "XYSafeTimer.h"
 #import "SVProgressHUD.h"
 #import "XYAccountAuth.h"
 
@@ -129,7 +129,7 @@ static XYLoginViewController *_instance = nil;
 - (void)recover{
     self.isAppear = YES;
     //启动需要时间，应设置比动画时间长，否则有可能会图像越界
-    self.timer = [XYWeakTimerTargetObj scheduledTimerWithTimeInterval:16 target:self selector:@selector(scrollScrollViewIsRecover:) userInfo:nil repeats:YES];
+    self.timer = [XYSafeTimer scheduledTimerWithTimeInterval:16 target:self selector:@selector(scrollScrollViewIsRecover:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     [self scrollScrollViewIsRecover:YES];
 }

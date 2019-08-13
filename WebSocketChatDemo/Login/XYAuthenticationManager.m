@@ -8,7 +8,7 @@
 
 #import "XYAuthenticationManager.h"
 #import "XYAccountAuth.h"
-#import "XYWeakTimerTargetObj.h"
+#import "XYSafeTimer.h"
 #import "XYLoginViewController.h"
 #import "SVProgressHUD.h"
 
@@ -94,7 +94,7 @@ static NSString * const kAuthUserKey = @"auth_user";
     if (self.isLogin == NO) {
         return;
     }
-    self.timer = [XYWeakTimerTargetObj scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(heartBeatAction) userInfo:nil repeats:YES];
+    self.timer = [XYSafeTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(heartBeatAction) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
