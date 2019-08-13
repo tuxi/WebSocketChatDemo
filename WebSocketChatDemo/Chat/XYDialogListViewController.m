@@ -101,7 +101,7 @@
 #pragma mark - Actions
 
 - (void)logout {
-    [[XYAuthenticationManager manager] logout];
+    [[XYAuthenticationManager manager] invalidate];
     [[XYLoginViewController sharedInstance] showWithStyle:XYLoginViewStyleLogin animated:YES closeable:NO superController:self];
 }
 

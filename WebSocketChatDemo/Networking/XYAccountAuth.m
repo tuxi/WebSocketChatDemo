@@ -10,10 +10,6 @@
 #import <AFNetworking.h>
 #import "XYAuthenticationManager.h"
 
-
-NSString * const kBaseURLString = @"https://chat.enba.com/api";
-//NSString * const kBaseURLString = @"http://10.211.55.4/api";
-
 @implementation XYAccountAuth
 
 + (NSURLSessionDataTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password completionHandler:(void (^)(NSURLSessionDataTask * _Nonnull, XYUser * _Nullable, NSError * _Nullable))completion {
@@ -31,11 +27,9 @@ NSString * const kBaseURLString = @"https://chat.enba.com/api";
             if (response.statusCode == 200) {
                 NSDictionary *userDict = responseObject[@"user"];
                 NSString *token = responseObject[@"token"];
-                NSString *sessionid = responseObject[@"sessionid"];
                 XYUser *user = [[XYUser alloc] initWithDict:userDict];
                 [[XYAuthenticationManager manager] setUser:user];
                 [[XYAuthenticationManager manager] setAuthToken:token];
-                [[XYAuthenticationManager manager] setSessionId:sessionid];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (user && token) {
                         completion(task, user, nil);
@@ -55,6 +49,59 @@ NSString * const kBaseURLString = @"https://chat.enba.com/api";
         if (completion) {
             completion(task, nil, error);
         }
+    }];
+}
+
++ (NSURLSessionDataTask * _Nullable)heartbeatWithCompletionHandler:(void (^)(NSURLSessionDataTask * _Nullable, BOOL, NSError * _Nullable))completion {
+    NSString *url = [NSString stringWithFormat:@"%@/heartbeat/", kBaseURLString];
+    
+    if ([XYAuthenticationManager manager].isLogin == NO) {
+        if (completion) {
+            completion(nil, NO, [NSError errorWithDomain:@"LoginInValid" code:-1 userInfo:nil]);
+        }
+        return nil;
+    }
+    
+    NSDictionary *parameters = @{@"token": [XYAuthenticationManager manager].authToken};
+    // 忽略缓存
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    return [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (completion) {
+            NSHTTPURLResponse *response = (id)task.response;
+            if (response.statusCode == 200) {
+                NSDictionary *userDict = responseObject[@"user"];
+                NSString *token = responseObject[@"token"];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (userDict && token) {
+                        completion(task, YES, nil);
+                    }
+                    else {
+                        completion(task, NO, [NSError errorWithDomain:NSURLErrorDomain code:response.statusCode userInfo:responseObject]);
+                    }
+                });
+                
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(task, NO, [NSError errorWithDomain:NSURLErrorDomain code:response.statusCode userInfo:responseObject]);
+                });
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSHTTPURLResponse *response = (id)task.response;
+        // 服务没有打开时response 为 nil
+        if (response && response.statusCode == 400) {
+            // 400 为 参数错误 登陆失效，比如token错了或者token这个字段传错了
+            if (completion) {
+                completion(task, NO, error);
+            }
+        }
+        else {
+            // 其他响应code 不处理，可能是超时了，或者服务器本身的错误
+        }
+        
     }];
 }
 

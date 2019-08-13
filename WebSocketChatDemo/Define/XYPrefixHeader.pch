@@ -1,0 +1,16 @@
+//
+//  XYPrefixHeader.pch
+//  WebSocketChatDemo
+//
+//  Created by xiaoyuan on 2019/8/13.
+//  Copyright © 2019 xiaoyuan. All rights reserved.
+//
+
+#ifndef XYPrefixHeader_pch
+#define XYPrefixHeader_pch
+
+#import "XYDefines.h"
+
+FOUNDATION_EXPORT NSNotificationName const kLoginSuccessNotification;
+
+#endif /* XYPrefixHeader_pch */

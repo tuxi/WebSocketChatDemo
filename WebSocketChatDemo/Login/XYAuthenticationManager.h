@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 用于接口请求的授权
 @property (nonatomic, copy, nullable) NSString *authToken;
-// 用作websocket与服务器连接
-@property (nonatomic, copy, nullable) NSString *sessionId;
 // 记录当前登陆的用户
 @property (nonatomic, strong, nullable) XYUser *user;
 // 是否登陆
@@ -24,8 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)manager;
 
-// 退出登陆需要清空用户
-- (void)logout;
+// 让登陆状态无效，退出登陆时需要调用此方法
+- (void)invalidate;
 
 @end
 

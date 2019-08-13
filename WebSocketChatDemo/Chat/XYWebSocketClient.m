@@ -10,8 +10,6 @@
 #import <SRWebSocket.h>
 #import "XYAuthenticationManager.h"
 
-//static NSString *const kBaseHost = @"ws://10.211.55.4/ws";
-static NSString *const kBaseHost = @"wss://chat.enba.com/ws";
 @interface XYWebSocketClient () <SRWebSocketDelegate>
 
 @property (nonatomic, strong) SRWebSocket *socket;
@@ -60,7 +58,8 @@ static NSString *const kBaseHost = @"wss://chat.enba.com/ws";
 - (void)open {
     [self.socket close];
     self.socket.delegate = nil;
-    NSString *wssHostStr = [NSString stringWithFormat:@"%@/%@/%@", kBaseHost,  [XYAuthenticationManager manager].sessionId, self.opponent];
+//    NSString *wssHostStr = [NSString stringWithFormat:@"%@/%@/%@", kBaseHost,  [XYAuthenticationManager manager].authToken, self.opponent];
+    NSString *wssHostStr = [NSString stringWithFormat:@"%@/?%@=%@&opponent=%@", kWebSocketHost, kWebSocketTokenKey, [XYAuthenticationManager manager].authToken, self.opponent];
     NSURL *url = [NSURL URLWithString:wssHostStr];
     self.socket = [[SRWebSocket alloc] initWithURLRequest:[[NSURLRequest alloc] initWithURL:url]];
     self.socket.delegate = self;
@@ -112,7 +111,7 @@ static NSString *const kBaseHost = @"wss://chat.enba.com/ws";
 - (void)checkOnlineWithOpponent:(NSString *)username {
     NSDictionary *dict = @{
         @"type": @"check-online",
-        @"session_key": [XYAuthenticationManager manager].sessionId,
+        @"jwt_token": [XYAuthenticationManager manager].authToken,
         @"username": username
     };
     
@@ -162,7 +161,7 @@ static NSString *const kBaseHost = @"wss://chat.enba.com/ws";
     // 根据服务端制定的规范，发送消息
     NSDictionary *data = @{
                            @"type":@"new-message",
-                           @"session_key": [XYAuthenticationManager manager].sessionId,
+                           kWebSocketTokenKey: [XYAuthenticationManager manager].authToken,
                            @"username": username,
                            @"message":text
                            };

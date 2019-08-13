@@ -3,20 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		AA4C0ECBDBBE09801C87DFBC /* libPods-WebSocketChatDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEFD1E2214BDE81D1EF5962 /* libPods-WebSocketChatDemo.a */; };
-		D229CBD022FFB0790047B2FD /* XYWebSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D229CBCF22FFB0790047B2FD /* XYWebSocketClient.m */; };
-		D229CBD322FFBEA30047B2FD /* XYApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D229CBD222FFBEA30047B2FD /* XYApiClient.m */; };
-		D229CBD622FFBFA90047B2FD /* XYDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = D229CBD522FFBFA90047B2FD /* XYDialog.m */; };
-		D229CBD922FFBFBC0047B2FD /* XYMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D229CBD822FFBFBC0047B2FD /* XYMessage.m */; };
+		D0F4360223025BFE00102335 /* XYAccountAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F435FD23025BFE00102335 /* XYAccountAuth.m */; };
+		D0F4360323025BFE00102335 /* XYApiClientResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F435FF23025BFE00102335 /* XYApiClientResponse.m */; };
+		D0F4360423025BFE00102335 /* XYApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4360023025BFE00102335 /* XYApiClient.m */; };
+		D0F4361623025C0E00102335 /* XYMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4360623025C0E00102335 /* XYMainNavigationController.m */; };
+		D0F4361723025C0E00102335 /* XYMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4360A23025C0E00102335 /* XYMessageListViewController.m */; };
+		D0F4361823025C0E00102335 /* XYDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4360B23025C0E00102335 /* XYDialog.m */; };
+		D0F4361923025C0E00102335 /* XYDialogListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4360C23025C0E00102335 /* XYDialogListViewController.m */; };
+		D0F4361A23025C0E00102335 /* XYMessageListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4360D23025C0E00102335 /* XYMessageListViewModel.m */; };
+		D0F4361B23025C0E00102335 /* XYMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4360E23025C0E00102335 /* XYMessage.m */; };
+		D0F4361C23025C0E00102335 /* XYWebSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4360F23025C0E00102335 /* XYWebSocketClient.m */; };
+		D0F4361D23025C0E00102335 /* XYDialogListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4361023025C0E00102335 /* XYDialogListViewModel.m */; };
+		D0F4362623025C2700102335 /* XYAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4362023025C2700102335 /* XYAuthenticationManager.m */; };
+		D0F4362723025C2700102335 /* XYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4362123025C2700102335 /* XYLoginViewController.m */; };
+		D0F4362823025C2700102335 /* XYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4362223025C2700102335 /* XYUser.m */; };
+		D0F4362923025C2700102335 /* XYLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F4362323025C2700102335 /* XYLoginViewController.xib */; };
+		D0F4362C23029DFA00102335 /* XYDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4362B23029DFA00102335 /* XYDefines.m */; };
 		D24BC68322FE98AE000F905D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC68222FE98AE000F905D /* AppDelegate.m */; };
 		D24BC68B22FE98B2000F905D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24BC68A22FE98B2000F905D /* Assets.xcassets */; };
 		D24BC68E22FE98B2000F905D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24BC68C22FE98B2000F905D /* LaunchScreen.storyboard */; };
 		D24BC69122FE98B2000F905D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC69022FE98B2000F905D /* main.m */; };
-		D24BC69F22FE9B01000F905D /* XYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC69D22FE9B01000F905D /* XYLoginViewController.m */; };
 		D24BC6BB22FE9B5E000F905D /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6A422FE9B5E000F905D /* MMMaterialDesignSpinner.m */; };
 		D24BC6BC22FE9B5E000F905D /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6A622FE9B5E000F905D /* SVRadialGradientLayer.m */; };
 		D24BC6BD22FE9B5E000F905D /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6A922FE9B5E000F905D /* SVProgressAnimatedView.m */; };
@@ -26,30 +37,44 @@
 		D24BC6C122FE9B5E000F905D /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B622FE9B5E000F905D /* FBShimmeringLayer.m */; };
 		D24BC6C222FE9B5E000F905D /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B722FE9B5E000F905D /* FBShimmeringView.m */; };
 		D24BC6C322FE9B5E000F905D /* DeformationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6B922FE9B5E000F905D /* DeformationButton.m */; };
-		D24BC6C522FE9C86000F905D /* XYLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24BC6C422FE9C86000F905D /* XYLoginViewController.xib */; };
 		D24BC6C822FEA297000F905D /* XYWeakTimerTargetObj.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */; };
-		D24BC6CC22FEDB9C000F905D /* XYDialogListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6CB22FEDB9C000F905D /* XYDialogListViewController.m */; };
-		D24BC6D022FEE3B3000F905D /* XYAccountAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6CF22FEE3B3000F905D /* XYAccountAuth.m */; };
-		D24BC6D322FEE43E000F905D /* XYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6D222FEE43E000F905D /* XYUser.m */; };
-		D24BC6D922FEEBA5000F905D /* XYAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6D822FEEBA5000F905D /* XYAuthenticationManager.m */; };
-		D24BC6DC22FEF593000F905D /* XYMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC6DB22FEF593000F905D /* XYMainNavigationController.m */; };
-		D26D55A922FFCB7A00C6DDAF /* XYDialogListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55A822FFCB7A00C6DDAF /* XYDialogListViewModel.m */; };
-		D26D55AC22FFCC2400C6DDAF /* XYApiClientResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55AB22FFCC2400C6DDAF /* XYApiClientResponse.m */; };
-		D26D55AF22FFD72200C6DDAF /* XYMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55AE22FFD72200C6DDAF /* XYMessageListViewController.m */; };
-		D26D55B222FFDED600C6DDAF /* XYMessageListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D55B122FFDED600C6DDAF /* XYMessageListViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0DEFD1E2214BDE81D1EF5962 /* libPods-WebSocketChatDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WebSocketChatDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5F68C2281EE800D915990E /* Pods-WebSocketChatDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSocketChatDemo.release.xcconfig"; path = "Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo.release.xcconfig"; sourceTree = "<group>"; };
-		D229CBCE22FFB0790047B2FD /* XYWebSocketClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYWebSocketClient.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYWebSocketClient.h; sourceTree = "<group>"; };
-		D229CBCF22FFB0790047B2FD /* XYWebSocketClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYWebSocketClient.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYWebSocketClient.m; sourceTree = "<group>"; };
-		D229CBD122FFBEA30047B2FD /* XYApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYApiClient.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYApiClient.h; sourceTree = "<group>"; };
-		D229CBD222FFBEA30047B2FD /* XYApiClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYApiClient.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYApiClient.m; sourceTree = "<group>"; };
-		D229CBD422FFBFA90047B2FD /* XYDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYDialog.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYDialog.h; sourceTree = "<group>"; };
-		D229CBD522FFBFA90047B2FD /* XYDialog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYDialog.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYDialog.m; sourceTree = "<group>"; };
-		D229CBD722FFBFBC0047B2FD /* XYMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYMessage.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMessage.h; sourceTree = "<group>"; };
-		D229CBD822FFBFBC0047B2FD /* XYMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYMessage.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMessage.m; sourceTree = "<group>"; };
+		D0F435FC23025BFE00102335 /* XYApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYApiClient.h; sourceTree = "<group>"; };
+		D0F435FD23025BFE00102335 /* XYAccountAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAccountAuth.m; sourceTree = "<group>"; };
+		D0F435FE23025BFE00102335 /* XYApiClientResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYApiClientResponse.h; sourceTree = "<group>"; };
+		D0F435FF23025BFE00102335 /* XYApiClientResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYApiClientResponse.m; sourceTree = "<group>"; };
+		D0F4360023025BFE00102335 /* XYApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYApiClient.m; sourceTree = "<group>"; };
+		D0F4360123025BFE00102335 /* XYAccountAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYAccountAuth.h; sourceTree = "<group>"; };
+		D0F4360623025C0E00102335 /* XYMainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMainNavigationController.m; sourceTree = "<group>"; };
+		D0F4360723025C0E00102335 /* XYDialogListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDialogListViewModel.h; sourceTree = "<group>"; };
+		D0F4360823025C0E00102335 /* XYMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMessage.h; sourceTree = "<group>"; };
+		D0F4360923025C0E00102335 /* XYWebSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYWebSocketClient.h; sourceTree = "<group>"; };
+		D0F4360A23025C0E00102335 /* XYMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMessageListViewController.m; sourceTree = "<group>"; };
+		D0F4360B23025C0E00102335 /* XYDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDialog.m; sourceTree = "<group>"; };
+		D0F4360C23025C0E00102335 /* XYDialogListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDialogListViewController.m; sourceTree = "<group>"; };
+		D0F4360D23025C0E00102335 /* XYMessageListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMessageListViewModel.m; sourceTree = "<group>"; };
+		D0F4360E23025C0E00102335 /* XYMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMessage.m; sourceTree = "<group>"; };
+		D0F4360F23025C0E00102335 /* XYWebSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYWebSocketClient.m; sourceTree = "<group>"; };
+		D0F4361023025C0E00102335 /* XYDialogListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDialogListViewModel.m; sourceTree = "<group>"; };
+		D0F4361123025C0E00102335 /* XYMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMainNavigationController.h; sourceTree = "<group>"; };
+		D0F4361223025C0E00102335 /* XYDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDialog.h; sourceTree = "<group>"; };
+		D0F4361323025C0E00102335 /* XYMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMessageListViewController.h; sourceTree = "<group>"; };
+		D0F4361423025C0E00102335 /* XYMessageListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMessageListViewModel.h; sourceTree = "<group>"; };
+		D0F4361523025C0E00102335 /* XYDialogListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDialogListViewController.h; sourceTree = "<group>"; };
+		D0F4361F23025C2700102335 /* XYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUser.h; sourceTree = "<group>"; };
+		D0F4362023025C2700102335 /* XYAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAuthenticationManager.m; sourceTree = "<group>"; };
+		D0F4362123025C2700102335 /* XYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYLoginViewController.m; sourceTree = "<group>"; };
+		D0F4362223025C2700102335 /* XYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUser.m; sourceTree = "<group>"; };
+		D0F4362323025C2700102335 /* XYLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYLoginViewController.xib; sourceTree = "<group>"; };
+		D0F4362423025C2700102335 /* XYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLoginViewController.h; sourceTree = "<group>"; };
+		D0F4362523025C2700102335 /* XYAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYAuthenticationManager.h; sourceTree = "<group>"; };
+		D0F4362A23029DFA00102335 /* XYDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYDefines.h; sourceTree = "<group>"; };
+		D0F4362B23029DFA00102335 /* XYDefines.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYDefines.m; sourceTree = "<group>"; };
+		D0F4362E23029E4100102335 /* XYPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYPrefixHeader.pch; sourceTree = "<group>"; };
 		D24BC67E22FE98AE000F905D /* WebSocketChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebSocketChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24BC68122FE98AE000F905D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D24BC68222FE98AE000F905D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,8 +82,6 @@
 		D24BC68D22FE98B2000F905D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D24BC68F22FE98B2000F905D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D24BC69022FE98B2000F905D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D24BC69C22FE9B01000F905D /* XYLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYLoginViewController.h; sourceTree = "<group>"; };
-		D24BC69D22FE9B01000F905D /* XYLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYLoginViewController.m; sourceTree = "<group>"; };
 		D24BC6A222FE9B5E000F905D /* DeformationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeformationButton.h; path = WebSocketChatDemo/Extra/DeformationButton.h; sourceTree = SOURCE_ROOT; };
 		D24BC6A422FE9B5E000F905D /* MMMaterialDesignSpinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMMaterialDesignSpinner.m; path = WebSocketChatDemo/Extra/MMMaterialDesignSpinner.m; sourceTree = SOURCE_ROOT; };
 		D24BC6A622FE9B5E000F905D /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
@@ -79,27 +102,8 @@
 		D24BC6B722FE9B5E000F905D /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
 		D24BC6B822FE9B5E000F905D /* MMMaterialDesignSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMMaterialDesignSpinner.h; path = WebSocketChatDemo/Extra/MMMaterialDesignSpinner.h; sourceTree = SOURCE_ROOT; };
 		D24BC6B922FE9B5E000F905D /* DeformationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeformationButton.m; path = WebSocketChatDemo/Extra/DeformationButton.m; sourceTree = SOURCE_ROOT; };
-		D24BC6C422FE9C86000F905D /* XYLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XYLoginViewController.xib; path = ../../../../../../../../../../Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYLoginViewController.xib; sourceTree = "<group>"; };
 		D24BC6C622FEA297000F905D /* XYWeakTimerTargetObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYWeakTimerTargetObj.h; path = WebSocketChatDemo/Extra/XYWeakTimerTargetObj.h; sourceTree = SOURCE_ROOT; };
 		D24BC6C722FEA297000F905D /* XYWeakTimerTargetObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYWeakTimerTargetObj.m; path = WebSocketChatDemo/Extra/XYWeakTimerTargetObj.m; sourceTree = SOURCE_ROOT; };
-		D24BC6CA22FEDB9C000F905D /* XYDialogListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYDialogListViewController.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYDialogListViewController.h; sourceTree = "<group>"; };
-		D24BC6CB22FEDB9C000F905D /* XYDialogListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYDialogListViewController.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYDialogListViewController.m; sourceTree = "<group>"; };
-		D24BC6CE22FEE3B3000F905D /* XYAccountAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYAccountAuth.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYAccountAuth.h; sourceTree = "<group>"; };
-		D24BC6CF22FEE3B3000F905D /* XYAccountAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYAccountAuth.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYAccountAuth.m; sourceTree = "<group>"; };
-		D24BC6D122FEE43E000F905D /* XYUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYUser.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYUser.h; sourceTree = "<group>"; };
-		D24BC6D222FEE43E000F905D /* XYUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYUser.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYUser.m; sourceTree = "<group>"; };
-		D24BC6D722FEEBA5000F905D /* XYAuthenticationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYAuthenticationManager.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYAuthenticationManager.h; sourceTree = "<group>"; };
-		D24BC6D822FEEBA5000F905D /* XYAuthenticationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYAuthenticationManager.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Login/XYAuthenticationManager.m; sourceTree = "<group>"; };
-		D24BC6DA22FEF593000F905D /* XYMainNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYMainNavigationController.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMainNavigationController.h; sourceTree = "<group>"; };
-		D24BC6DB22FEF593000F905D /* XYMainNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYMainNavigationController.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMainNavigationController.m; sourceTree = "<group>"; };
-		D26D55A722FFCB7A00C6DDAF /* XYDialogListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYDialogListViewModel.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYDialogListViewModel.h; sourceTree = "<group>"; };
-		D26D55A822FFCB7A00C6DDAF /* XYDialogListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYDialogListViewModel.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYDialogListViewModel.m; sourceTree = "<group>"; };
-		D26D55AA22FFCC2400C6DDAF /* XYApiClientResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYApiClientResponse.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYApiClientResponse.h; sourceTree = "<group>"; };
-		D26D55AB22FFCC2400C6DDAF /* XYApiClientResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYApiClientResponse.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Networking/XYApiClientResponse.m; sourceTree = "<group>"; };
-		D26D55AD22FFD72200C6DDAF /* XYMessageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XYMessageListViewController.h; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMessageListViewController.h; sourceTree = "<group>"; };
-		D26D55AE22FFD72200C6DDAF /* XYMessageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XYMessageListViewController.m; path = ../../../../../../../System/Volumes/Data/Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat/XYMessageListViewController.m; sourceTree = "<group>"; };
-		D26D55B022FFDED600C6DDAF /* XYMessageListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYMessageListViewModel.h; sourceTree = "<group>"; };
-		D26D55B122FFDED600C6DDAF /* XYMessageListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYMessageListViewModel.m; sourceTree = "<group>"; };
 		EF2B6BDF09F7F3F19E55B6D8 /* Pods-WebSocketChatDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSocketChatDemo.debug.xcconfig"; path = "Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +119,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0F4360523025C0E00102335 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D0F4360623025C0E00102335 /* XYMainNavigationController.m */,
+				D0F4360723025C0E00102335 /* XYDialogListViewModel.h */,
+				D0F4360823025C0E00102335 /* XYMessage.h */,
+				D0F4360923025C0E00102335 /* XYWebSocketClient.h */,
+				D0F4360A23025C0E00102335 /* XYMessageListViewController.m */,
+				D0F4360B23025C0E00102335 /* XYDialog.m */,
+				D0F4360C23025C0E00102335 /* XYDialogListViewController.m */,
+				D0F4360D23025C0E00102335 /* XYMessageListViewModel.m */,
+				D0F4360E23025C0E00102335 /* XYMessage.m */,
+				D0F4360F23025C0E00102335 /* XYWebSocketClient.m */,
+				D0F4361023025C0E00102335 /* XYDialogListViewModel.m */,
+				D0F4361123025C0E00102335 /* XYMainNavigationController.h */,
+				D0F4361223025C0E00102335 /* XYDialog.h */,
+				D0F4361323025C0E00102335 /* XYMessageListViewController.h */,
+				D0F4361423025C0E00102335 /* XYMessageListViewModel.h */,
+				D0F4361523025C0E00102335 /* XYDialogListViewController.h */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		D0F4361E23025C2700102335 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D0F4361F23025C2700102335 /* XYUser.h */,
+				D0F4362023025C2700102335 /* XYAuthenticationManager.m */,
+				D0F4362123025C2700102335 /* XYLoginViewController.m */,
+				D0F4362223025C2700102335 /* XYUser.m */,
+				D0F4362323025C2700102335 /* XYLoginViewController.xib */,
+				D0F4362423025C2700102335 /* XYLoginViewController.h */,
+				D0F4362523025C2700102335 /* XYAuthenticationManager.h */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D0F4362D23029E0D00102335 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				D0F4362A23029DFA00102335 /* XYDefines.h */,
+				D0F4362B23029DFA00102335 /* XYDefines.m */,
+				D0F4362E23029E4100102335 /* XYPrefixHeader.pch */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
 		D24BC67522FE98AD000F905D = {
 			isa = PBXGroup;
 			children = (
@@ -136,10 +187,11 @@
 		D24BC68022FE98AE000F905D /* WebSocketChatDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D0F4362D23029E0D00102335 /* Define */,
+				D0F4361E23025C2700102335 /* Login */,
+				D0F4360523025C0E00102335 /* Chat */,
 				D24BC6CD22FEE359000F905D /* Networking */,
-				D24BC6C922FEA9FC000F905D /* Chat */,
 				D24BC6A122FE9B3C000F905D /* Extra */,
-				D24BC69822FE9A9C000F905D /* Login */,
 				D24BC68122FE98AE000F905D /* AppDelegate.h */,
 				D24BC68222FE98AE000F905D /* AppDelegate.m */,
 				D24BC68A22FE98B2000F905D /* Assets.xcassets */,
@@ -148,20 +200,6 @@
 				D24BC69022FE98B2000F905D /* main.m */,
 			);
 			path = WebSocketChatDemo;
-			sourceTree = "<group>";
-		};
-		D24BC69822FE9A9C000F905D /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				D24BC6C422FE9C86000F905D /* XYLoginViewController.xib */,
-				D24BC69C22FE9B01000F905D /* XYLoginViewController.h */,
-				D24BC69D22FE9B01000F905D /* XYLoginViewController.m */,
-				D24BC6D122FEE43E000F905D /* XYUser.h */,
-				D24BC6D222FEE43E000F905D /* XYUser.m */,
-				D24BC6D722FEEBA5000F905D /* XYAuthenticationManager.h */,
-				D24BC6D822FEEBA5000F905D /* XYAuthenticationManager.m */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		D24BC6A122FE9B3C000F905D /* Extra */ = {
@@ -212,39 +250,15 @@
 			path = WebSocketChatDemo/Extra/FBShimmering;
 			sourceTree = SOURCE_ROOT;
 		};
-		D24BC6C922FEA9FC000F905D /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				D24BC6CA22FEDB9C000F905D /* XYDialogListViewController.h */,
-				D24BC6CB22FEDB9C000F905D /* XYDialogListViewController.m */,
-				D24BC6DA22FEF593000F905D /* XYMainNavigationController.h */,
-				D24BC6DB22FEF593000F905D /* XYMainNavigationController.m */,
-				D229CBCE22FFB0790047B2FD /* XYWebSocketClient.h */,
-				D229CBCF22FFB0790047B2FD /* XYWebSocketClient.m */,
-				D229CBD422FFBFA90047B2FD /* XYDialog.h */,
-				D229CBD522FFBFA90047B2FD /* XYDialog.m */,
-				D229CBD722FFBFBC0047B2FD /* XYMessage.h */,
-				D229CBD822FFBFBC0047B2FD /* XYMessage.m */,
-				D26D55A722FFCB7A00C6DDAF /* XYDialogListViewModel.h */,
-				D26D55A822FFCB7A00C6DDAF /* XYDialogListViewModel.m */,
-				D26D55AD22FFD72200C6DDAF /* XYMessageListViewController.h */,
-				D26D55AE22FFD72200C6DDAF /* XYMessageListViewController.m */,
-				D26D55B022FFDED600C6DDAF /* XYMessageListViewModel.h */,
-				D26D55B122FFDED600C6DDAF /* XYMessageListViewModel.m */,
-			);
-			name = Chat;
-			path = ../../../../../../../../../Users/swae/Documents/Github/WebSocketChatDemo/WebSocketChatDemo/Chat;
-			sourceTree = "<group>";
-		};
 		D24BC6CD22FEE359000F905D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				D24BC6CE22FEE3B3000F905D /* XYAccountAuth.h */,
-				D24BC6CF22FEE3B3000F905D /* XYAccountAuth.m */,
-				D229CBD122FFBEA30047B2FD /* XYApiClient.h */,
-				D229CBD222FFBEA30047B2FD /* XYApiClient.m */,
-				D26D55AA22FFCC2400C6DDAF /* XYApiClientResponse.h */,
-				D26D55AB22FFCC2400C6DDAF /* XYApiClientResponse.m */,
+				D0F4360123025BFE00102335 /* XYAccountAuth.h */,
+				D0F435FD23025BFE00102335 /* XYAccountAuth.m */,
+				D0F435FC23025BFE00102335 /* XYApiClient.h */,
+				D0F4360023025BFE00102335 /* XYApiClient.m */,
+				D0F435FE23025BFE00102335 /* XYApiClientResponse.h */,
+				D0F435FF23025BFE00102335 /* XYApiClientResponse.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -327,8 +341,8 @@
 			files = (
 				D24BC6C022FE9B5E000F905D /* SVProgressHUD.bundle in Resources */,
 				D24BC68E22FE98B2000F905D /* LaunchScreen.storyboard in Resources */,
-				D24BC6C522FE9C86000F905D /* XYLoginViewController.xib in Resources */,
 				D24BC68B22FE98B2000F905D /* Assets.xcassets in Resources */,
+				D0F4362923025C2700102335 /* XYLoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,30 +377,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo-resources.sh",
-				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Assets/JSQMessagesAssets.bundle",
-				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Controllers/JSQMessagesViewController.xib",
-				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesCollectionViewCellIncoming.xib",
-				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesCollectionViewCellOutgoing.xib",
-				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesLoadEarlierHeaderView.xib",
-				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesToolbarContentView.xib",
-				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesTypingIndicatorFooterView.xib",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesAssets.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesCollectionViewCellIncoming.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesCollectionViewCellOutgoing.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesLoadEarlierHeaderView.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesToolbarContentView.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesTypingIndicatorFooterView.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-WebSocketChatDemo/Pods-WebSocketChatDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -401,30 +396,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				D24BC6BC22FE9B5E000F905D /* SVRadialGradientLayer.m in Sources */,
-				D24BC6CC22FEDB9C000F905D /* XYDialogListViewController.m in Sources */,
-				D24BC6D022FEE3B3000F905D /* XYAccountAuth.m in Sources */,
-				D24BC6D322FEE43E000F905D /* XYUser.m in Sources */,
-				D26D55B222FFDED600C6DDAF /* XYMessageListViewModel.m in Sources */,
+				D0F4361623025C0E00102335 /* XYMainNavigationController.m in Sources */,
+				D0F4361923025C0E00102335 /* XYDialogListViewController.m in Sources */,
+				D0F4362623025C2700102335 /* XYAuthenticationManager.m in Sources */,
+				D0F4362823025C2700102335 /* XYUser.m in Sources */,
 				D24BC6C122FE9B5E000F905D /* FBShimmeringLayer.m in Sources */,
-				D26D55A922FFCB7A00C6DDAF /* XYDialogListViewModel.m in Sources */,
+				D0F4362C23029DFA00102335 /* XYDefines.m in Sources */,
+				D0F4361D23025C0E00102335 /* XYDialogListViewModel.m in Sources */,
+				D0F4361C23025C0E00102335 /* XYWebSocketClient.m in Sources */,
 				D24BC69122FE98B2000F905D /* main.m in Sources */,
+				D0F4361B23025C0E00102335 /* XYMessage.m in Sources */,
 				D24BC68322FE98AE000F905D /* AppDelegate.m in Sources */,
 				D24BC6BF22FE9B5E000F905D /* SVIndefiniteAnimatedView.m in Sources */,
-				D26D55AF22FFD72200C6DDAF /* XYMessageListViewController.m in Sources */,
-				D229CBD922FFBFBC0047B2FD /* XYMessage.m in Sources */,
+				D0F4360423025BFE00102335 /* XYApiClient.m in Sources */,
 				D24BC6C822FEA297000F905D /* XYWeakTimerTargetObj.m in Sources */,
 				D24BC6C222FE9B5E000F905D /* FBShimmeringView.m in Sources */,
-				D26D55AC22FFCC2400C6DDAF /* XYApiClientResponse.m in Sources */,
-				D229CBD622FFBFA90047B2FD /* XYDialog.m in Sources */,
+				D0F4361823025C0E00102335 /* XYDialog.m in Sources */,
 				D24BC6BE22FE9B5E000F905D /* SVProgressHUD.m in Sources */,
-				D24BC6DC22FEF593000F905D /* XYMainNavigationController.m in Sources */,
 				D24BC6BB22FE9B5E000F905D /* MMMaterialDesignSpinner.m in Sources */,
+				D0F4361723025C0E00102335 /* XYMessageListViewController.m in Sources */,
+				D0F4360323025BFE00102335 /* XYApiClientResponse.m in Sources */,
+				D0F4362723025C2700102335 /* XYLoginViewController.m in Sources */,
 				D24BC6C322FE9B5E000F905D /* DeformationButton.m in Sources */,
-				D24BC69F22FE9B01000F905D /* XYLoginViewController.m in Sources */,
 				D24BC6BD22FE9B5E000F905D /* SVProgressAnimatedView.m in Sources */,
-				D229CBD322FFBEA30047B2FD /* XYApiClient.m in Sources */,
-				D24BC6D922FEEBA5000F905D /* XYAuthenticationManager.m in Sources */,
-				D229CBD022FFB0790047B2FD /* XYWebSocketClient.m in Sources */,
+				D0F4360223025BFE00102335 /* XYAccountAuth.m in Sources */,
+				D0F4361A23025C0E00102335 /* XYMessageListViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +557,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NKW67GFDHM;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WebSocketChatDemo/Define/XYPrefixHeader.pch;
 				INFOPLIST_FILE = WebSocketChatDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -580,6 +578,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NKW67GFDHM;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WebSocketChatDemo/Define/XYPrefixHeader.pch;
 				INFOPLIST_FILE = WebSocketChatDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

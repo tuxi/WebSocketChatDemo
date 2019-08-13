@@ -7,16 +7,24 @@
 //
 
 #import "XYAuthenticationManager.h"
+#import "XYAccountAuth.h"
+#import "XYWeakTimerTargetObj.h"
+#import "XYLoginViewController.h"
+#import "SVProgressHUD.h"
 
 static NSString * const kAuthTokenKey = @"auth_token";
-static NSString * const kAuthSessionIdKey = @"session_id";
 static NSString * const kAuthUserKey = @"auth_user";
+
+@interface XYAuthenticationManager ()
+
+@property (nonatomic, weak) NSTimer *timer;
+
+@end
 
 @implementation XYAuthenticationManager
 
 @synthesize authToken = _authToken;
 @synthesize user = _user;
-@synthesize sessionId = _sessionId;
 
 + (instancetype)manager {
     static id _instance = nil;
@@ -25,6 +33,18 @@ static NSString * const kAuthUserKey = @"auth_user";
         _instance = self.new;
     });
     return _instance;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:kLoginSuccessNotification object:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self startHeartBeatLoop];
+        });
+    }
+    return self;
 }
 
 - (void)setAuthToken:(NSString *)authToken {
@@ -48,18 +68,6 @@ static NSString * const kAuthUserKey = @"auth_user";
     _user = user;
 }
 
-- (void)setSessionId:(NSString *)sessionId {
-    [[NSUserDefaults standardUserDefaults] setObject:sessionId forKey:kAuthSessionIdKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    _sessionId = sessionId;
-}
-
-- (NSString *)sessionId {
-    if (_sessionId == nil) {
-        return _sessionId = [[NSUserDefaults standardUserDefaults] objectForKey:kAuthSessionIdKey];
-    }
-    return _sessionId;
-}
 
 - (XYUser *)user {
     if (_user == nil) {
@@ -73,10 +81,49 @@ static NSString * const kAuthUserKey = @"auth_user";
     return self.authToken.length && self.user;
 }
 
-- (void)logout {
+- (void)invalidate {
     self.authToken = nil;
     self.user = nil;
-    self.sessionId = nil;
+    [self stopHeartBeatLoop];
 }
+
+#pragma mark - Private methods
+
+- (void)startHeartBeatLoop {
+    [self stopHeartBeatLoop];
+    if (self.isLogin == NO) {
+        return;
+    }
+    self.timer = [XYWeakTimerTargetObj scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(heartBeatAction) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+}
+
+- (void)stopHeartBeatLoop {
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
+- (void)onLoginSuccess:(NSNotification *)notify {
+    [self startHeartBeatLoop];
+}
+
+- (void)heartBeatAction {
+    __weak typeof(self) weakSelf = self;
+    [XYAccountAuth heartbeatWithCompletionHandler:^(NSURLSessionDataTask * _Nullable task, BOOL isValid, NSError * _Nullable error) {
+        if (!isValid) {
+            [weakSelf invalidate];
+            [SVProgressHUD showErrorWithStatus:@"登陆已失效，请重新登录..."];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 登陆失效，则弹出登陆页面
+                UIViewController *vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+                [[XYLoginViewController sharedInstance] showWithStyle:XYLoginViewStyleLogin animated:YES closeable:NO superController:vc];
+            });
+            
+        }
+    }];
+}
+
 
 @end

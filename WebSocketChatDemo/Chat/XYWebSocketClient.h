@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger,XYSocketStatus){
 // 接收到消息的回调
 - (void)onReceiveMessageCallback:(void (^)(id message))callback;
 
-// 检查用户是否在线
+// 检查对方是否在线
 // @param opponent 发送用户名，因为用户需要知道对方是否在线
 - (void)checkOnlineWithOpponent:(NSString *)username;
 
