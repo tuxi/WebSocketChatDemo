@@ -59,6 +59,25 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self removeNotification];
+    [[XYWebSocketClient sharedInstance] close];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self addNotification];
+    [[XYWebSocketClient sharedInstance] openWithOpponent:self.opponent.username];
+}
+
+- (void)addNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveTextViewNotification:)
+                                                 name:UITextViewTextDidChangeNotification
+                                               object:nil];
+}
+
+- (void)removeNotification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
 }
 
 - (void)initData {
@@ -67,7 +86,6 @@
     self.senderId = @(self.opponent.userId).stringValue;
     //发送者name
     self.senderDisplayName = self.opponent.nickname?: self.opponent.username;
-    [[XYWebSocketClient sharedInstance] openWithOpponent:self.opponent.username];
 }
 
 - (void)setupViews {
@@ -123,6 +141,11 @@
     [self.view endEditing:YES];
     [self.view resignFirstResponder];
     [self.inputToolbar.contentView.textView endEditing:YES];
+}
+
+#pragma mark - Notifications
+- (void)didReceiveTextViewNotification:(NSNotification *)noftify {
+    [[XYWebSocketClient sharedInstance] sendTypingPacket];
 }
 
 #pragma mark - JSQMessagesViewController method overrides

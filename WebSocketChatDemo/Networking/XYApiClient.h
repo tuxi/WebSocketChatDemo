@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSURLSessionDataTask *)getMessagesByDialogId:(NSInteger)dialogId page:(NSInteger)page completionHandler:(void (^ _Nullable )(NSURLSessionDataTask * _Nullable task, XYApiClientResponse * _Nullable response, NSError *_Nullable error))completion;
 
++ (NSURLSessionDataTask *)getUserListWithPage:(NSInteger)page completionHandler:(void (^ _Nullable )(NSURLSessionDataTask * _Nullable task, XYApiClientResponse * _Nullable response, NSError *_Nullable error))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -32,20 +32,27 @@ typedef NS_ENUM(NSInteger,XYSocketStatus){
 // 开始与某个用户对话
 - (void)openWithOpponent:(NSString *)username;
 
-// 断开连接，此操作应由用户触发，不再出发重连机制
+// 告诉对方我要下线了， 发送关闭连接的数据包
+// 断开连接，此操作应由用户触发，不再触发重连机制
 - (void)close;
 
-// 给某个用户发送消息
+// 给对方发送消息
 // @param username 接收消息的用户
 // @param message 消息内容
 - (void)sendMessage:(NSString *)message;
 
 // 接收到消息的回调
-- (void)onReceiveMessageCallback:(void (^)(id message))callback;
+//- (void)onReceiveMessageCallback:(void (^)(id message))callback;
 
 // 检查对方是否在线
 // @param opponent 发送用户名，因为用户需要知道对方是否在线
-- (void)checkOnlineWithOpponent:(NSString *)username;
+- (void)sendOnlineCheckPacket;
+
+// 发送已读消息数据包
+- (void)sendReadMessagePacketWithMessageId:(NSString *)messageId;
+
+// 告诉对方我正在输入， 键盘在输入时，发送正在输入的数据包
+- (void)sendTypingPacket;
 
 @end
 

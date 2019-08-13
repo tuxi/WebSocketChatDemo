@@ -9,12 +9,13 @@
 #import "XYWebSocketClient.h"
 #import <SRWebSocket.h>
 #import "XYAuthenticationManager.h"
+#import "XYSafeTimer.h"
 
 @interface XYWebSocketClient () <SRWebSocketDelegate>
 
 @property (nonatomic, strong) SRWebSocket *socket;
 // 重连定时器
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, weak) NSTimer *timer;
 @property (nonatomic, copy) void (^ receiveMessageCallback)(id message);
 @property (nonatomic, assign) NSInteger reconnectCount;
 @property (nonatomic, copy) NSString *opponent;
@@ -32,7 +33,9 @@
     return _instance;
 }
 
-#pragma mark - Public methods
+- (void)dealloc {
+    [self close];
+}
 
 - (instancetype)init
 {
@@ -45,6 +48,8 @@
     return self;
 }
 
+
+#pragma mark - Public methods
 
 // 连接websocket服务器
 - (void)openWithOpponent:(NSString *)username {
@@ -74,6 +79,7 @@
 // 结束连接
 - (void)close {
     
+    [self sendClosePacket];
     [self.socket close];
     self.socket = nil;
     [self.timer invalidate];
@@ -108,16 +114,67 @@
     [self.socket send:jsonstr];
 }
 
-- (void)checkOnlineWithOpponent:(NSString *)username {
+// 发送上线的数据包
+- (void)sendConnectPacket {
+    NSDictionary *dict = @{
+                           @"type": @"online",
+                           kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
+                           };
+    NSString *jsonStr = [self jsonWithDict:dict];
+    NSLog(@"connected, sending: %@", jsonStr);
+    [self.socket send:jsonStr];
+}
+
+// websocket 连接成功后，检测对方是否在线
+- (void)sendOnlineCheckPacket {
     NSDictionary *dict = @{
         @"type": @"check-online",
         kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
-        @"username": username
+        @"username": self.opponent
     };
     
     NSString *jsonStr = [self jsonWithDict:dict];
+    NSLog(@"checking online opponents with: %@", jsonStr);
     [self.socket send:jsonStr];
 }
+
+- (void)sendClosePacket {
+    NSDictionary *dict = @{
+                           @"type": @"offline",
+                           kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
+                           @"username": self.opponent
+                           };
+    NSString *jsonStr = [self jsonWithDict:dict];
+    NSLog(@"unloading, sending: %@", jsonStr);
+    [self.socket send:jsonStr];
+}
+
+// 发送已读消息数据包
+- (void)sendReadMessagePacketWithMessageId:(NSString *)messageId {
+    NSDictionary *dict = @{
+                           @"type": @"read_message",
+                           kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
+                           @"username": self.opponent,
+                           @"message_id": messageId,
+                           };
+    NSString *jsonStr = [self jsonWithDict:dict];
+    NSLog(@"read message, sending: %@", jsonStr);
+    [self.socket send:jsonStr];
+}
+
+// 告诉对方我正在输入， 键盘在输入时，发送正在输入的数据包
+- (void)sendTypingPacket {
+    NSDictionary *dict = @{
+                           @"type": @"is-typing",
+                           kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
+                           @"username": self.opponent,
+                           @"typing": @(YES),
+                           };
+    NSString *jsonStr = [self jsonWithDict:dict];
+    NSLog(@"正在输入中: %@", jsonStr);
+    [self.socket send:jsonStr];
+}
+
 
 #pragma mark - Private methods
 
@@ -139,7 +196,7 @@
     if (_reconnectCount < self.maxReconnectCount - 1 && self.status != XYSocketStatusClosedByUser) {
         _reconnectCount ++;
         // 开启定时器
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.overtime target:self selector:@selector(open) userInfo:nil repeats:NO];
+        NSTimer *timer = [XYSafeTimer scheduledTimerWithTimeInterval:self.overtime target:self selector:@selector(open) userInfo:nil repeats:NO];
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
         self.timer = timer;
     }
@@ -185,6 +242,8 @@
 {
     NSLog(@"已连接");
     self.status = XYSocketStatusConnected;
+    [self sendConnectPacket];
+    [self sendOnlineCheckPacket];
 }
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
@@ -195,21 +254,54 @@
 }
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
 {
-    NSLog(@"接收消息:\n %@",message);
     
-    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *messageDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSData *packet = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *messageDict = [NSJSONSerialization JSONObjectWithData:packet options:NSJSONReadingAllowFragments error:nil];
     
     // 收到消息后，保存到数据库
     
-    if (self.receiveMessageCallback) {
-        self.receiveMessageCallback(messageDict);
+    NSString *type = messageDict[@"type"];
+    if (type == nil) {
+        return;
     }
+    
+    if ([type isEqualToString:@"gone-online"]) {
+        // 对方已上线
+        NSLog(@"对方已上线: %@", self.opponent);
+    }
+    else if ([type isEqualToString:@"gone-online"]) {
+        // 对方已下线
+         NSLog(@"对方已下线: %@", self.opponent);
+    }
+    else if ([type isEqualToString:@"new-message"]) {
+        // 收到新消息
+        if ([messageDict[@"sender_name"] isEqualToString:self.opponent] || [messageDict[@"send_name"] isEqualToString:[XYAuthenticationManager manager].user.username]) {
+            // 添加这个消息到消息列表
+            if ([messageDict[@"sender_name"] isEqualToString:self.opponent]) {
+                [self sendReadMessagePacketWithMessageId:messageDict[@"id"]];
+            }
+        }
+        NSLog(@"接收到【%@】的消息:\n %@", self.opponent, messageDict[@"message"]);
+    }
+    else if ([type isEqualToString:@"opponent-typing"]) {
+        // 对方正在输入
+        NSLog(@"对方正在输入: %@", self.opponent);
+    }
+    else if ([type isEqualToString:@"opponent-read-message"]) {
+        // 对方消息已读
+        if ([messageDict[@"sender_name"] isEqualToString:self.opponent]) {
+            NSLog(@"对方消息已读: %@", self.opponent);
+        }
+    }
+    else {
+        NSLog(@"error: %@", messageDict);
+    }
+    
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
-    NSLog(@" 长连接关闭");
+    NSLog(@" 发生错误，长连接断开");
     self.status = XYSocketStatusClosedByServer;
     [self reconnect];
 }
