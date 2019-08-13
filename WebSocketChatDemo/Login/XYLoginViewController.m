@@ -30,6 +30,10 @@ NSNotificationName const kLoginSuccessNotification = @"kLoginSuccess";
 @property (weak, nonatomic) IBOutlet UIScrollView *backScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *changePwdBtn;
 @property (weak, nonatomic) IBOutlet UIButton *closeButon;
+@property (weak, nonatomic) IBOutlet UIButton *weiboButton;
+@property (weak, nonatomic) IBOutlet UIButton *QQButton;
+@property (weak, nonatomic) IBOutlet UIButton *WechatButton;
+@property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 @property (weak, nonatomic) UIButton *maskBtn;
 @property (nonatomic,weak) NSTimer *timer;//定时器
 @property (nonatomic,assign) XYLoginViewStyle currentStyle;
@@ -80,7 +84,7 @@ static XYLoginViewController *_instance = nil;
     self.closeButon.hidden = !closeable;
 }
 
-//的在XIB布局后才能改变视图结构，不然会被XIB改回去
+// 在XIB布局后才能改变视图结构，不然会被XIB改回去
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if (self.currentStyle == XYLoginViewStyleLogin) {//记住账号名
@@ -88,6 +92,7 @@ static XYLoginViewController *_instance = nil;
     }
     [self changeModelHidden];
     [self recover];
+
 }
 
 - (void)viewDidLoad {
@@ -111,7 +116,9 @@ static XYLoginViewController *_instance = nil;
     self.changePwdBtn.layer.cornerRadius = 10;
     self.changePwdBtn.alpha = 0;
     
-    //添加shimmer效果,图片100 X 100
+    [self hidenThirdPartyLoginButtons:YES];
+    
+    // 添加shimmer效果,图片100 X 100
     FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 50, 75, 100, 100)];
     [self.view addSubview:shimmeringView];
     shimmeringView.shimmeringPauseDuration = 1.5;
@@ -125,13 +132,20 @@ static XYLoginViewController *_instance = nil;
 }
 
 
-//重置背景位置和定时器
+// 重置背景位置和定时器
 - (void)recover{
     self.isAppear = YES;
     //启动需要时间，应设置比动画时间长，否则有可能会图像越界
     self.timer = [XYSafeTimer scheduledTimerWithTimeInterval:16 target:self selector:@selector(scrollScrollViewIsRecover:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     [self scrollScrollViewIsRecover:YES];
+}
+
+- (void)hidenThirdPartyLoginButtons:(BOOL)hiden {
+    self.weiboButton.hidden = hiden;
+    self.QQButton.hidden = hiden;
+    self.WechatButton.hidden = hiden;
+    self.bottomLabel.hidden = hiden;
 }
 
 
@@ -401,10 +415,10 @@ static XYLoginViewController *_instance = nil;
 }
 
 - (void)sameCode{
-    self.weboIcon.alpha = 1;
-    self.QQIcon.alpha = 1;
-    self.wechatIcon.alpha = 1;
-    self.logLabel.alpha = 1;
+    self.weiboButton.alpha = 1;
+    self.QQButton.alpha = 1;
+    self.WechatButton.alpha = 1;
+    self.bottomLabel.alpha = 1;
     self.forgetAndAuth.alpha = 1;
     self.changePwdBtn.alpha = 0;
     self.login.alpha = 1;
@@ -454,10 +468,10 @@ static XYLoginViewController *_instance = nil;
             self.pwdAndAuth.placeholder = @"请输入验证码";
             [self.login setTitle:@"提交" forState:UIControlStateNormal];
             [self.phoneRegist setTitle:@"返回登录" forState:UIControlStateNormal];
-            self.weboIcon.alpha = 0;
-            self.QQIcon.alpha = 0;
-            self.wechatIcon.alpha = 0;
-            self.logLabel.alpha = 0;
+            self.weiboButton.alpha = 0;
+            self.QQButton.alpha = 0;
+            self.WechatButton.alpha = 0;
+            self.bottomLabel.alpha = 0;
             if (self.lastStyle == XYLoginViewStyleRegister) {
                 CGRect frame = self.login.frame;
                 frame.origin.y -= 40;
@@ -465,10 +479,10 @@ static XYLoginViewController *_instance = nil;
             }
             break;
         case XYLoginViewStyleChangePassword:
-            self.weboIcon.alpha = 0;
-            self.QQIcon.alpha = 0;
-            self.wechatIcon.alpha = 0;
-            self.logLabel.alpha = 0;
+            self.weiboButton.alpha = 0;
+            self.QQButton.alpha = 0;
+            self.WechatButton.alpha = 0;
+            self.bottomLabel.alpha = 0;
             self.forgetAndAuth.alpha = 0;
             self.phoneNum.placeholder = @"请输入旧密码";
             self.phoneNum.secureTextEntry = YES;
@@ -516,10 +530,10 @@ static XYLoginViewController *_instance = nil;
             self.pwdAndAuth.placeholder = @"请输入验证码";
             [self.login setTitle:@"提交" forState:UIControlStateNormal];
             [self.phoneRegist setTitle:@"返回登录" forState:UIControlStateNormal];
-            self.weboIcon.alpha = 0;
-            self.QQIcon.alpha = 0;
-            self.wechatIcon.alpha = 0;
-            self.logLabel.alpha = 0;
+            self.weiboButton.alpha = 0;
+            self.QQButton.alpha = 0;
+            self.WechatButton.alpha = 0;
+            self.bottomLabel.alpha = 0;
         }];
     }
     else {
@@ -529,10 +543,10 @@ static XYLoginViewController *_instance = nil;
             self.pwdAndAuth.placeholder = @"请输入密码";
             [self.login setTitle:@"登录" forState:UIControlStateNormal];
             [self.phoneRegist setTitle:@"手机注册" forState:UIControlStateNormal];
-            self.weboIcon.alpha = 1;
-            self.QQIcon.alpha = 1;
-            self.wechatIcon.alpha = 1;
-            self.logLabel.alpha = 1;
+            self.weiboButton.alpha = 1;
+            self.QQButton.alpha = 1;
+            self.WechatButton.alpha = 1;
+            self.bottomLabel.alpha = 1;
         }];
     }
 }
@@ -579,9 +593,9 @@ static XYLoginViewController *_instance = nil;
 
 //各类按钮点击功能开关
 - (void)userInteractionIsAllow:(BOOL)allow{
-    self.weboIcon.userInteractionEnabled = allow;
-    self.QQIcon.userInteractionEnabled = allow;
-    self.wechatIcon.userInteractionEnabled = allow;
+    self.weiboButton.userInteractionEnabled = allow;
+    self.QQButton.userInteractionEnabled = allow;
+    self.WechatButton.userInteractionEnabled = allow;
     self.phoneRegist.userInteractionEnabled = allow;
     self.forgetAndAuth.userInteractionEnabled = allow;
 }

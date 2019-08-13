@@ -22,11 +22,6 @@ FOUNDATION_EXPORT NSNotificationName const kLoginSuccessNotification;
 
 @interface XYLoginViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *weboIcon;
-@property (weak, nonatomic) IBOutlet UIButton *QQIcon;
-@property (weak, nonatomic) IBOutlet UIButton *wechatIcon;
-@property (weak, nonatomic) IBOutlet UILabel *logLabel;
-
 + (instancetype)sharedInstance;
 
 // 显示登陆控制器

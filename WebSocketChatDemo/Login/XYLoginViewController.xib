@@ -11,20 +11,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XYLoginViewController">
             <connections>
-                <outlet property="QQIcon" destination="CHd-aM-ZDL" id="YCb-LO-SpM"/>
+                <outlet property="QQButton" destination="CHd-aM-ZDL" id="YCb-LO-SpM"/>
+                <outlet property="WechatButton" destination="nxN-NW-hTm" id="dKb-XF-gmP"/>
                 <outlet property="backScrollView" destination="pFJ-AG-Xoa" id="J3U-jD-CmZ"/>
+                <outlet property="bottomLabel" destination="XUg-Tf-kcE" id="aiv-fD-m8G"/>
                 <outlet property="changePwdBtn" destination="0uw-oz-Sfl" id="Q6w-3K-v3T"/>
                 <outlet property="closeButon" destination="L7N-ai-Kvy" id="FD0-ha-84Z"/>
                 <outlet property="forgetAndAuth" destination="A1p-Uh-sc5" id="kOF-RI-wrg"/>
-                <outlet property="logLabel" destination="XUg-Tf-kcE" id="aiv-fD-m8G"/>
                 <outlet property="login" destination="Mal-Fn-YeK" id="LeD-r2-jhV"/>
                 <outlet property="phoneNum" destination="zWX-ag-Ljc" id="u4g-ga-1XS"/>
                 <outlet property="phoneRegist" destination="ova-kt-ywj" id="urm-dB-XC4"/>
                 <outlet property="pwdAndAuth" destination="OeT-fz-cCp" id="1bU-k0-2v4"/>
                 <outlet property="registPwd" destination="XVM-wy-PkX" id="fat-AN-eeh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="weboIcon" destination="X86-vO-uNE" id="d4c-ji-Nd2"/>
-                <outlet property="wechatIcon" destination="nxN-NW-hTm" id="dKb-XF-gmP"/>
+                <outlet property="weiboButton" destination="X86-vO-uNE" id="d4c-ji-Nd2"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -94,26 +94,8 @@
                                 <action selector="login:" destination="-1" eventType="touchUpInside" id="UFN-sy-NSG"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHd-aM-ZDL">
-                            <rect key="frame" x="164" y="437" width="46" height="45"/>
-                            <state key="normal" image="qq"/>
-                            <connections>
-                                <action selector="qqLogin:" destination="-1" eventType="touchUpInside" id="dn3-ab-an5"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxN-NW-hTm">
-                            <rect key="frame" x="255" y="437" width="45" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="45" id="DsV-Oy-ghO"/>
-                                <constraint firstAttribute="height" constant="45" id="ZK9-na-VjM"/>
-                            </constraints>
-                            <state key="normal" image="wechat"/>
-                            <connections>
-                                <action selector="wechatLogin:" destination="-1" eventType="touchUpInside" id="Nax-Q3-hdy"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ova-kt-ywj">
-                            <rect key="frame" x="152" y="386" width="70" height="33"/>
+                            <rect key="frame" x="152" y="411" width="70" height="33"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <state key="normal" title="手机注册">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,12 +104,6 @@
                                 <action selector="phoneRegistBtn:" destination="-1" eventType="touchUpInside" id="vZU-LH-nJq"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方快速登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-Tf-kcE">
-                            <rect key="frame" x="137" y="496" width="100" height="15"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7N-ai-Kvy">
                             <rect key="frame" x="15" y="50" width="45" height="45"/>
                             <constraints>
@@ -137,17 +113,6 @@
                             <state key="normal" image="hud_cancel"/>
                             <connections>
                                 <action selector="backToSuperVC:" destination="-1" eventType="touchUpInside" id="DEB-xs-PeU"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X86-vO-uNE">
-                            <rect key="frame" x="74" y="437" width="45" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="45" id="UOR-mT-tKz"/>
-                                <constraint firstAttribute="height" constant="45" id="UxB-wB-2rw"/>
-                            </constraints>
-                            <state key="normal" image="webo"/>
-                            <connections>
-                                <action selector="weboLogin:" destination="-1" eventType="touchUpInside" id="SJl-fL-lP8"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0uw-oz-Sfl">
@@ -164,6 +129,41 @@
                                 <action selector="changePwd:" destination="-1" eventType="touchUpInside" id="x3Y-cT-U7T"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHd-aM-ZDL">
+                            <rect key="frame" x="164" y="469" width="46" height="45"/>
+                            <state key="normal" image="qq"/>
+                            <connections>
+                                <action selector="qqLogin:" destination="-1" eventType="touchUpInside" id="dn3-ab-an5"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxN-NW-hTm">
+                            <rect key="frame" x="255" y="469" width="45" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="45" id="DsV-Oy-ghO"/>
+                                <constraint firstAttribute="height" constant="45" id="ZK9-na-VjM"/>
+                            </constraints>
+                            <state key="normal" image="wechat"/>
+                            <connections>
+                                <action selector="wechatLogin:" destination="-1" eventType="touchUpInside" id="Nax-Q3-hdy"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方快速登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-Tf-kcE">
+                            <rect key="frame" x="137" y="528" width="100" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X86-vO-uNE">
+                            <rect key="frame" x="74" y="469" width="45" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="45" id="UOR-mT-tKz"/>
+                                <constraint firstAttribute="height" constant="45" id="UxB-wB-2rw"/>
+                            </constraints>
+                            <state key="normal" image="webo"/>
+                            <connections>
+                                <action selector="weboLogin:" destination="-1" eventType="touchUpInside" id="SJl-fL-lP8"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="nxN-NW-hTm" firstAttribute="leading" secondItem="CHd-aM-ZDL" secondAttribute="trailing" constant="45" id="1yh-zR-h18"/>
@@ -175,7 +175,7 @@
                         <constraint firstItem="CHd-aM-ZDL" firstAttribute="centerX" secondItem="XUg-Tf-kcE" secondAttribute="centerX" id="Ii3-HY-5eo"/>
                         <constraint firstItem="OeT-fz-cCp" firstAttribute="leading" secondItem="zWX-ag-Ljc" secondAttribute="leading" id="LTK-xp-bDR"/>
                         <constraint firstItem="A1p-Uh-sc5" firstAttribute="top" secondItem="zWX-ag-Ljc" secondAttribute="bottom" constant="10" id="OEK-re-sqZ"/>
-                        <constraint firstItem="nxN-NW-hTm" firstAttribute="top" secondItem="Mal-Fn-YeK" secondAttribute="bottom" constant="98" id="OPv-Mo-iqq"/>
+                        <constraint firstItem="nxN-NW-hTm" firstAttribute="top" secondItem="Mal-Fn-YeK" secondAttribute="bottom" constant="130" id="OPv-Mo-iqq"/>
                         <constraint firstItem="CHd-aM-ZDL" firstAttribute="top" secondItem="nxN-NW-hTm" secondAttribute="top" id="OYV-Of-e07"/>
                         <constraint firstItem="A1p-Uh-sc5" firstAttribute="trailing" secondItem="OeT-fz-cCp" secondAttribute="trailing" constant="-5" id="PmL-9h-yRX"/>
                         <constraint firstItem="nxN-NW-hTm" firstAttribute="trailing" secondItem="Mal-Fn-YeK" secondAttribute="trailing" id="QoB-fu-fMu"/>
@@ -186,7 +186,7 @@
                         <constraint firstItem="0uw-oz-Sfl" firstAttribute="top" secondItem="XVM-wy-PkX" secondAttribute="bottom" constant="15" id="bGh-E0-hNp"/>
                         <constraint firstItem="XUg-Tf-kcE" firstAttribute="leading" secondItem="8OU-dH-fEf" secondAttribute="leading" constant="137" id="doJ-yv-QOw"/>
                         <constraint firstItem="CHd-aM-ZDL" firstAttribute="leading" secondItem="X86-vO-uNE" secondAttribute="trailing" constant="45" id="eB8-kb-7LN"/>
-                        <constraint firstItem="CHd-aM-ZDL" firstAttribute="top" secondItem="ova-kt-ywj" secondAttribute="bottom" constant="18" id="fXG-N2-0oB"/>
+                        <constraint firstItem="CHd-aM-ZDL" firstAttribute="top" secondItem="ova-kt-ywj" secondAttribute="bottom" constant="25" id="fXG-N2-0oB"/>
                         <constraint firstItem="L7N-ai-Kvy" firstAttribute="top" secondItem="8OU-dH-fEf" secondAttribute="top" constant="50" id="iay-VS-oKJ"/>
                         <constraint firstItem="XVM-wy-PkX" firstAttribute="top" secondItem="OeT-fz-cCp" secondAttribute="bottom" constant="10" id="lR2-CA-Bm3"/>
                         <constraint firstItem="OeT-fz-cCp" firstAttribute="top" secondItem="8OU-dH-fEf" secondAttribute="top" constant="266" id="lXN-ZJ-zf8"/>
