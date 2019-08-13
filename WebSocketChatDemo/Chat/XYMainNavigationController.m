@@ -24,7 +24,7 @@
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     [super pushViewController:viewController animated:animated];
     
-    if ([XYAuthenticationManager manager].user == nil) {
+    if ([[XYAuthenticationManager manager] isLogin] == NO) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[XYLoginViewController sharedInstance] showWithStyle:XYLoginViewStyleLogin animated:NO closeable:NO superController:viewController];
         });

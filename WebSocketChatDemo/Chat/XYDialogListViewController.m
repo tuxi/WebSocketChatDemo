@@ -22,6 +22,10 @@
 
 @implementation XYDialogListViewController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -31,6 +35,8 @@
     if ([XYAuthenticationManager manager].isLogin) {
         [self.tableView.mj_header beginRefreshing];
     }
+    
+    [self addObserver];
 }
 
 - (void)setupUI {
@@ -69,7 +75,7 @@
 }
 
 - (void)addObserver {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:kLoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess) name:kLoginSuccessNotification object:nil];
 }
 
 - (void)getDataFromServer:(BOOL)isMore {
@@ -105,7 +111,7 @@
     [[XYLoginViewController sharedInstance] showWithStyle:XYLoginViewStyleLogin animated:YES closeable:NO superController:self];
 }
 
-- (void)loginSuccess {
+- (void)onLoginSuccess {
     [self.tableView.mj_header beginRefreshing];
 }
 

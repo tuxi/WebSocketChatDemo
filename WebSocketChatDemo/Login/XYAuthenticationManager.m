@@ -26,6 +26,10 @@ static NSString * const kAuthUserKey = @"auth_user";
 @synthesize authToken = _authToken;
 @synthesize user = _user;
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 + (instancetype)manager {
     static id _instance = nil;
     static dispatch_once_t onceToken;
@@ -61,8 +65,10 @@ static NSString * const kAuthUserKey = @"auth_user";
 }
 
 - (void)setUser:(XYUser *)user {
-    
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:user requiringSecureCoding:NO error:nil];
+    NSData *data = nil;
+    if (user) {
+        data = [NSKeyedArchiver archivedDataWithRootObject:user requiringSecureCoding:NO error:nil];
+    }
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:kAuthUserKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     _user = user;
