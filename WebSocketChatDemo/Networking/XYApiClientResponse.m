@@ -20,6 +20,9 @@
     return self;
 }
 
+- (Class)contentClass {
+    return _contentClass;
+}
 
 - (void)setValue:(id)value forKey:(NSString *)key {
     if ([key isEqualToString:@"results"]) {

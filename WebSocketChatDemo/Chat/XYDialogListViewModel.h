@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, assign) BOOL hasMore;
-@property (nonatomic, strong) NSMutableArray<XYDialog *> *data;
+@property (nonatomic, strong) NSMutableArray<XYDialog *> *dialogs;
 
 - (void)getMyDialogsWithIsMore:(BOOL)isMore completionHandler:(void (^ _Nullable )(NSArray<XYDialog *> *_Nullable dialogs, NSError *_Nullable error))completion;
-
+- (void)getMyFriendsWithIsMore:(BOOL)isMore completionHandler:(void (^ _Nullable )(NSArray<XYUser *> *_Nullable users, NSError *_Nullable error))completion;;
 @end
 
 NS_ASSUME_NONNULL_END

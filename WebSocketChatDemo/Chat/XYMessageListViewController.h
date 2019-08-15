@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XYMessageListViewController : JSQMessagesViewController
 
-- (instancetype)initWithDialog:(XYDialog *)dialog;
+- (instancetype)initWithOpponent:(XYUser *)user dialog:(XYDialog *)dialog;
 
 @end
 

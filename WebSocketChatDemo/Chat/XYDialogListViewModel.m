@@ -9,6 +9,12 @@
 #import "XYDialogListViewModel.h"
 #import "XYApiClient.h"
 
+@interface XYDialogListViewModel ()
+
+@property (nonatomic, strong) NSMutableArray<XYUser *> *users;
+
+@end
+
 @implementation XYDialogListViewModel
 
 - (instancetype)init
@@ -19,6 +25,37 @@
         _hasMore = YES;
     }
     return self;
+}
+
+- (void)getMyFriendsWithIsMore:(BOOL)isMore completionHandler:(void (^ _Nullable)(NSArray<XYUser *> * _Nullable, NSError * _Nullable))completion {
+    if (isMore == NO) {
+        self.page = 1;
+    }
+    if (self.hasMore == NO) {
+        if (completion) {
+            completion(nil, [NSError errorWithDomain:@"InvalidPage" code:404 userInfo:@{@"detail": @"Invalid page."}]);
+        }
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
+    [XYApiClient getUsersWithPage:self.page completionHandler:^(NSURLSessionDataTask * _Nullable task, XYApiClientResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            completion(nil, error);
+        }
+        else {
+            if (response.next == 0) {
+                weakSelf.hasMore = NO;
+            }
+            else {
+                self.page += 1;
+            }
+            if (!isMore) {
+                [self.users removeAllObjects];
+            }
+            [self.users addObjectsFromArray:response.results];
+            completion(response.results, nil);
+        }
+    }];
 }
 
 - (void)getMyDialogsWithIsMore:(BOOL)isMore completionHandler:(void (^)(NSArray<XYDialog *> * _Nullable, NSError * _Nullable))completion {
@@ -44,19 +81,19 @@
                 self.page += 1;
             }
             if (!isMore) {
-                [self.data removeAllObjects];
+                [self.dialogs removeAllObjects];
             }
-            [self.data addObjectsFromArray:response.results];
+            [self.dialogs addObjectsFromArray:response.results];
             completion(response.results, nil);
         }
     }];
 }
 
-- (NSMutableArray<XYDialog *> *)data {
-    if (!_data) {
-        _data = [NSMutableArray arrayWithCapacity:3];
+- (NSMutableArray<XYDialog *> *)dialogs {
+    if (!_dialogs) {
+        _dialogs = [NSMutableArray arrayWithCapacity:3];
     }
-    return _data;
+    return _dialogs;
 }
 
 @end

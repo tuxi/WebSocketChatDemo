@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger next;
 @property (nonatomic, assign) NSInteger previous;
 @property (nonatomic, strong) NSMutableArray *results;
+@property (nonatomic, readonly) Class contentClass;
 
 - (instancetype)initWithDict:(NSDictionary *)dict resultClass:(Class)rsClass;
 

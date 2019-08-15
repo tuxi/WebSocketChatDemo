@@ -122,7 +122,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.viewModel.data.count;
+    return self.viewModel.dialogs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -131,16 +131,25 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:kCellIdentifier];
     }
-    XYDialog *model = self.viewModel.data[indexPath.row];
-    cell.textLabel.text = model.opponent.username;
+    XYDialog *dialog = self.viewModel.dialogs[indexPath.row];
+    XYUser *oppponent = dialog.opponent;
+    if ([XYAuthenticationManager manager].user.userId == dialog.opponent.userId) {
+        oppponent = dialog.owner;
+    }
+    cell.textLabel.text = oppponent.username;
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"last message: %@", model.modified];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"上一次: %@", dialog.modified];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    XYMessageListViewController *vc = [[XYMessageListViewController alloc] initWithDialog:self.viewModel.data[indexPath.row]];
+    XYDialog *dialog = self.viewModel.dialogs[indexPath.row];
+    XYUser *oppponent = dialog.opponent;
+    if ([XYAuthenticationManager manager].user.userId == dialog.opponent.userId) {
+        oppponent = dialog.owner;
+    }
+    XYMessageListViewController *vc = [[XYMessageListViewController alloc] initWithOpponent:oppponent dialog:dialog];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

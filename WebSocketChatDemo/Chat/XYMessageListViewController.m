@@ -19,26 +19,22 @@
 
 @interface XYMessageListViewController () <JSQMessagesComposerTextViewPasteDelegate>
 
-@property (nonatomic, strong) XYDialog *dialog;
+//@property (nonatomic, strong) XYDialog *dialog;
 @property (nonatomic, strong) XYMessageListViewModel *viewModel;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
 // 对方
 @property (nonatomic, strong) XYUser *opponent;
+@property (nonatomic, strong) XYDialog *dialog;
 
 @end
 
 @implementation XYMessageListViewController
 
-- (instancetype)initWithDialog:(XYDialog *)dialog {
+- (instancetype)initWithOpponent:(XYUser *)user dialog:(XYDialog *)dialog {
     if (self = [super init]) {
+        _opponent = user;
         _dialog = dialog;
-        if ([XYAuthenticationManager manager].user.userId == dialog.owner.userId) {
-            self.opponent = dialog.opponent;
-        }
-        else {
-            self.opponent = dialog.owner;
-        }
     }
     return self;
 }
