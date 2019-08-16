@@ -227,12 +227,12 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
         
         __weak typeof (self) weakSelf=self;
         //心跳设置为3分钟，NAT超时一般为5分钟
-        weakSelf.heartBeatTimer= [XYSafeTimer scheduledTimerWithTimeInterval:60 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        weakSelf.heartBeatTimer= [XYSafeTimer scheduledTimerWithTimeInterval:15 repeats:YES block:^(NSTimer * _Nonnull timer) {
             // 这里发送一个ping，服务端返回pong，
             weakSelf.pingCount += 1;
             [weakSelf sendPing];
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 // 如果ping 和 pong 在一定时间后不相同则可能已经断开，应该断开重连，具体根据nginx设置的超时时间，说明服务端主动断开了
                 // 如果onclose会执行reconnect，我们执行close()并且重连
                 if (weakSelf.pingCount != weakSelf.pongCount) {

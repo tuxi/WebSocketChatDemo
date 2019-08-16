@@ -24,6 +24,7 @@
 		D0F4362823025C2700102335 /* XYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4362223025C2700102335 /* XYUser.m */; };
 		D0F4362923025C2700102335 /* XYLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F4362323025C2700102335 /* XYLoginViewController.xib */; };
 		D0F4362C23029DFA00102335 /* XYDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4362B23029DFA00102335 /* XYDefines.m */; };
+		D2000C0D2306DFC900821B85 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2000C0C2306DFC900821B85 /* README.md */; };
 		D24BC68322FE98AE000F905D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D24BC68222FE98AE000F905D /* AppDelegate.m */; };
 		D24BC68B22FE98B2000F905D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24BC68A22FE98B2000F905D /* Assets.xcassets */; };
 		D24BC68E22FE98B2000F905D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24BC68C22FE98B2000F905D /* LaunchScreen.storyboard */; };
@@ -75,6 +76,7 @@
 		D0F4362A23029DFA00102335 /* XYDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYDefines.h; sourceTree = "<group>"; };
 		D0F4362B23029DFA00102335 /* XYDefines.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYDefines.m; sourceTree = "<group>"; };
 		D0F4362E23029E4100102335 /* XYPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYPrefixHeader.pch; sourceTree = "<group>"; };
+		D2000C0C2306DFC900821B85 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D24BC67E22FE98AE000F905D /* WebSocketChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebSocketChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24BC68122FE98AE000F905D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D24BC68222FE98AE000F905D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 		D24BC67522FE98AD000F905D = {
 			isa = PBXGroup;
 			children = (
+				D2000C0C2306DFC900821B85 /* README.md */,
 				D24BC68022FE98AE000F905D /* WebSocketChatDemo */,
 				D24BC67F22FE98AE000F905D /* Products */,
 				F3312973DD386F6ACDF515E7 /* Pods */,
@@ -341,6 +344,7 @@
 			files = (
 				D24BC6C022FE9B5E000F905D /* SVProgressHUD.bundle in Resources */,
 				D24BC68E22FE98B2000F905D /* LaunchScreen.storyboard in Resources */,
+				D2000C0D2306DFC900821B85 /* README.md in Resources */,
 				D24BC68B22FE98B2000F905D /* Assets.xcassets in Resources */,
 				D0F4362923025C2700102335 /* XYLoginViewController.xib in Resources */,
 			);
