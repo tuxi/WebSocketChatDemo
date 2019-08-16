@@ -23,7 +23,7 @@
     return [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(handleBlock:) userInfo:[block copy] repeats:repeats];
 }
 
-- (void)handleBlock:(NSTimer *)timer {
++ (void)handleBlock:(NSTimer *)timer {
     void (^block)(NSTimer *) = timer.userInfo;
     if (block) {
         block(timer);

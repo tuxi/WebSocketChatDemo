@@ -17,8 +17,6 @@ typedef NS_ENUM(NSInteger, XYLoginViewStyle) {
     XYLoginViewStyleChangePassword,
 };
 
-FOUNDATION_EXPORT NSNotificationName const kLoginSuccessNotification;
-
 
 @interface XYLoginViewController : UIViewController
 

@@ -27,8 +27,6 @@ typedef NS_ENUM(NSInteger,XYSocketStatus){
 // socket 连接状态
 @property (nonatomic, assign) XYSocketStatus status;
 
-//+ (instancetype)sharedInstance;
-
 // 开始与某个用户对话
 - (void)openWithOpponent:(NSString *)username;
 

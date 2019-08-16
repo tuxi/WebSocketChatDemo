@@ -18,3 +18,6 @@ NSString * const kBaseURLString = @"https://chat.enba.com/api";
 NSString *const kWebSocketHost = @"wss://chat.enba.com/ws";
 
 NSString * const kWebSocketTokenKey = @"token";
+
+NSNotificationName const kLoginSuccessNotification = @"kLoginSuccess";
+NSNotificationName const kLogloutNotification = @"kDidLogout";

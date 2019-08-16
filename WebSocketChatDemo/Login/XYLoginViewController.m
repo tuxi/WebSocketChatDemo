@@ -18,8 +18,6 @@
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define kAccount @"account"
 
-NSNotificationName const kLoginSuccessNotification = @"kLoginSuccess";
-
 @interface XYLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *phoneNum;
 @property (weak, nonatomic) IBOutlet UITextField *pwdAndAuth;

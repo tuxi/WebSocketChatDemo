@@ -15,5 +15,7 @@ FOUNDATION_EXPORT NSString * const kWebSocketHost;
 
 FOUNDATION_EXPORT NSString * const kWebSocketTokenKey;
 
+FOUNDATION_EXPORT NSNotificationName const kLoginSuccessNotification;
+FOUNDATION_EXPORT NSNotificationName const kLogloutNotification;
 
 NS_ASSUME_NONNULL_END
