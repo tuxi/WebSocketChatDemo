@@ -37,7 +37,7 @@
             completion(nil, error);
         }
         else {
-            if (response.next == 0) {
+            if (response.next == nil) {
                 weakSelf.hasMore = NO;
             }
             else {
@@ -56,7 +56,7 @@
                 else {
                     sender = dialog.opponent;
                 }
-                JSQMessage *message = [[JSQMessage alloc]initWithSenderId:[NSString stringWithFormat:@"%ld",sender.userId] senderDisplayName:sender.nickname?:sender.username date:model.createDate text:model.text];
+                JSQMessage *message = [[JSQMessage alloc]initWithSenderId:sender.username senderDisplayName:sender.nickname?:sender.username date:model.createDate text:model.text];
                 [self.messageArray addObject:message];
             }];
             completion(response.results, nil);

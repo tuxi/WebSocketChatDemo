@@ -13,19 +13,20 @@
 #import <MJRefresh/MJRefresh.h>
 #import "XYWebSocketClient.h"
 #import "XYAuthenticationManager.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define kBackGroundColor  UIColorFromRGB(0xf1f1f1)
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue &0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00)>> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface XYMessageListViewController () <JSQMessagesComposerTextViewPasteDelegate>
 
-//@property (nonatomic, strong) XYDialog *dialog;
 @property (nonatomic, strong) XYMessageListViewModel *viewModel;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
 // 对方
 @property (nonatomic, strong) XYUser *opponent;
 @property (nonatomic, strong) XYDialog *dialog;
+@property (nonatomic, strong) XYWebSocketClient *wsClient;
 
 @end
 
@@ -35,12 +36,20 @@
     if (self = [super init]) {
         _opponent = user;
         _dialog = dialog;
+        
+        self.wsClient = [[XYWebSocketClient alloc] init];
+        __weak typeof(self) weakSelf = self;
+        [self.wsClient onReceiveMessageCallback:^(NSDictionary * _Nonnull message) {
+            JSQMessage *mObj = [JSQMessage messageWithSenderId:weakSelf.opponent.username displayName:weakSelf.opponent.nickname ?: weakSelf.opponent.username text:message[@"message"]];
+            [weakSelf.viewModel.messageArray addObject:mObj];
+            [weakSelf finishReceivingMessageAnimated:YES];
+        }];
     }
     return self;
 }
 
 - (void)dealloc {
-    [[XYWebSocketClient sharedInstance] close];
+    [self.wsClient close];
 }
 
 - (void)viewDidLoad {
@@ -50,19 +59,19 @@
     [self setupViews];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self removeNotification];
-    [[XYWebSocketClient sharedInstance] close];
+    [self.wsClient close];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self addNotification];
-    [[XYWebSocketClient sharedInstance] openWithOpponent:self.opponent.username];
+    [self.wsClient openWithOpponent:self.opponent.username];
 }
 
 - (void)addNotification {
@@ -79,7 +88,7 @@
 - (void)initData {
     
     // 发送者id
-    self.senderId = @(self.opponent.userId).stringValue;
+    self.senderId = [XYAuthenticationManager manager].user.username;
     //发送者name
     self.senderDisplayName = self.opponent.nickname?: self.opponent.username;
 }
@@ -141,7 +150,7 @@
 
 #pragma mark - Notifications
 - (void)didReceiveTextViewNotification:(NSNotification *)noftify {
-    [[XYWebSocketClient sharedInstance] sendTypingPacket];
+    [self.wsClient sendTypingPacket];
 }
 
 #pragma mark - JSQMessagesViewController method overrides
@@ -155,7 +164,7 @@
                                                           date:date
                                                           text:text];
     
-    [[XYWebSocketClient sharedInstance] sendMessage:text];
+    [self.wsClient sendMessage:text];
     [self.viewModel.messageArray addObject:message];
     [self finishSendingMessageAnimated:YES];
 }
@@ -243,6 +252,17 @@
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                               NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
+    NSURL *avatarURL = nil;
+    if ([msg.senderId isEqualToString:self.opponent.username]) {
+        avatarURL = [NSURL URLWithString:self.opponent.avatar];
+    }
+    else {
+        avatarURL = [NSURL URLWithString:[XYAuthenticationManager manager].user.avatar];
+    }
+    [cell.avatarImageView sd_setImageWithURL:avatarURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
+    
     return cell;
 }
 
@@ -321,7 +341,7 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
 {
-    NSLog(@"Load earlier messages!");
+    NSLog(@"点击了加载之前的消息按钮");
 }
 //点击头像
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath

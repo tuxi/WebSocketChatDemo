@@ -10,11 +10,17 @@
 
 @implementation XYApiClientResponse {
     Class _contentClass;
+    BOOL _reverse;
 }
 
-- (instancetype)initWithDict:(NSDictionary *)dict resultClass:(nonnull Class)rsClass {
+- (instancetype)initWithDict:(NSDictionary *)dict resultClass:(Class)rsClass {
+    return [self initWithDict:dict resultClass:rsClass reverse:NO];
+}
+
+- (instancetype)initWithDict:(NSDictionary *)dict resultClass:(nonnull Class)rsClass reverse:(BOOL)reverse {
     if (self = [super init]) {
         _contentClass = rsClass;
+        _reverse = reverse;
         [self setValuesForKeysWithDictionary:dict];
     }
     return self;
@@ -25,6 +31,9 @@
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key {
+    if ([value isKindOfClass:[NSNull class]]) {
+        value = nil;
+    }
     if ([key isEqualToString:@"results"]) {
         if (![value isKindOfClass:[NSArray class]]) {
             value = nil;
@@ -32,11 +41,20 @@
         else {
             NSMutableArray *contents = [NSMutableArray arrayWithCapacity:[value count]];
             Class content_class = _contentClass;
-            [(NSArray *)value enumerateObjectsUsingBlock:^(id  _Nonnull dict, NSUInteger idx, BOOL * _Nonnull stop) {
-                id content = [[content_class alloc] init];
-                [content setValuesForKeysWithDictionary:dict];
-                [contents addObject:content];
-            }];
+            if (!_reverse) {
+                [(NSArray *)value enumerateObjectsUsingBlock:^(id  _Nonnull dict, NSUInteger idx, BOOL * _Nonnull stop) {
+                    id content = [[content_class alloc] init];
+                    [content setValuesForKeysWithDictionary:dict];
+                    [contents addObject:content];
+                }];
+            }
+            else {
+                [(NSArray *)value enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull dict, NSUInteger idx, BOOL * _Nonnull stop) {
+                    id content = [[content_class alloc] init];
+                    [content setValuesForKeysWithDictionary:dict];
+                    [contents addObject:content];
+                }];
+            }
             value = contents;
         }
     }

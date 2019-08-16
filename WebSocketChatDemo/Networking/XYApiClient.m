@@ -38,11 +38,11 @@ static NSInteger const kPageSize = 20;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    return [manager GET:url parameters:@{@"page": @(page), @"page_size": @(kPageSize), @"ordering": @"created"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    return [manager GET:url parameters:@{@"page": @(page), @"page_size": @(kPageSize), @"ordering": @"-modified"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) {
             NSHTTPURLResponse *response = (id)task.response;
             if (response.statusCode == 200) {
-                XYApiClientResponse *rs = [[XYApiClientResponse alloc] initWithDict:responseObject resultClass:[XYDialog class]];
+                XYApiClientResponse *rs = [[XYApiClientResponse alloc] initWithDict:responseObject resultClass:[XYDialog class] reverse:YES];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion(task, rs, nil);
@@ -88,12 +88,13 @@ static NSInteger const kPageSize = 20;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
-    
-    return [manager GET:url parameters:@{@"page": @(page),@"page_size": @(kPageSize),  @"dialog": @(dialogId), @"ordering": @"created"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    // -created 按创建时间降序排序
+    // created 按创建时间升序排序
+    return [manager GET:url parameters:@{@"page": @(page),@"page_size": @(kPageSize),  @"dialog": @(dialogId), @"ordering": @"-created"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) {
             NSHTTPURLResponse *response = (id)task.response;
             if (response.statusCode == 200) {
-                XYApiClientResponse *rs = [[XYApiClientResponse alloc] initWithDict:responseObject resultClass:[XYMessage class]];
+                XYApiClientResponse *rs = [[XYApiClientResponse alloc] initWithDict:responseObject resultClass:[XYMessage class] reverse:YES];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion(task, rs, nil);

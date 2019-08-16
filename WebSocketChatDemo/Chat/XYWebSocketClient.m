@@ -178,7 +178,7 @@
 
 #pragma mark - Private methods
 
-- (void)onReceiveMessageCallback:(void (^)(id _Nonnull))callback {
+- (void)onReceiveMessageCallback:(void (^)(NSDictionary * _Nonnull))callback {
     self.receiveMessageCallback = callback;
 }
 
@@ -267,7 +267,10 @@
     
     if ([type isEqualToString:@"gone-online"]) {
         // 对方已上线
-        NSLog(@"对方已上线: %@", self.opponent);
+        NSArray *usernames = messageDict[@"usernames"];
+        for (NSInteger i = 0; i < usernames.count; i++) {
+            NSLog(@"已上线: %@", usernames[i]);
+        }
     }
     else if ([type isEqualToString:@"gone-online"]) {
         // 对方已下线
@@ -275,13 +278,16 @@
     }
     else if ([type isEqualToString:@"new-message"]) {
         // 收到新消息
-        if ([messageDict[@"sender_name"] isEqualToString:self.opponent] || [messageDict[@"send_name"] isEqualToString:[XYAuthenticationManager manager].user.username]) {
+        if ([messageDict[@"sender_name"] isEqualToString:self.opponent]) {
             // 添加这个消息到消息列表
             if ([messageDict[@"sender_name"] isEqualToString:self.opponent]) {
-                [self sendReadMessagePacketWithMessageId:messageDict[@"id"]];
+                [self sendReadMessagePacketWithMessageId:messageDict[@"message_id"]];
             }
+            if (self.receiveMessageCallback) {
+                self.receiveMessageCallback(messageDict);
+            }
+            NSLog(@"接收到【%@】给【%@】发送的的消息:\n %@", messageDict[@"sender_name"], messageDict[@"username"], messageDict[@"message"]);
         }
-        NSLog(@"接收到【%@】的消息:\n %@", self.opponent, messageDict[@"message"]);
     }
     else if ([type isEqualToString:@"opponent-typing"]) {
         // 对方正在输入
