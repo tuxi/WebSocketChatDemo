@@ -151,8 +151,24 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
 
 
 - (void)sendPing {
-    [self.socket sendPing:[NSData data]];
-    NSLog(@"发送ping");
+    dispatch_main_async_safe(^{
+        switch (self.status) {
+            case XYSocketStatusConnected: {
+                NSLog(@"发送ping");
+                [self.socket sendPing:[NSData data]];
+                break;
+            }
+            case XYSocketStatusFailed:
+                NSLog(@"发送失败");
+                break;
+            case XYSocketStatusClosedByServer:
+                NSLog(@"已经关闭");
+                break;
+            case XYSocketStatusClosedByUser:
+                NSLog(@"已经关闭");
+                break;
+        }
+    });
 }
 
 
