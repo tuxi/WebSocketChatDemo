@@ -10,6 +10,14 @@
 下图为web前端与iOS 聊天的演示
 ![websocket client](https://static.objc.com/enba/static/websocketclient.gif)
 
+- [测试](https://chat.enba.com/test/)用户
+
+username | password
+:-: | :-: 
+user1 | password123 | 
+user2 | password123 | 
+
+
 ### 已完成的模块
 - 用户
 - 文本聊天
