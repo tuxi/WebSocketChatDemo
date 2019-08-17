@@ -85,12 +85,15 @@ static NSInteger const kPageSize = 20;
     
     // 将jwt传递给服务端，用于身份验证
     NSString *token = [NSString stringWithFormat:@"JWT %@", [XYAuthenticationManager manager].authToken];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 忽略缓存
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:config];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
     // -created 按创建时间降序排序
     // created 按创建时间升序排序
-    return [manager GET:url parameters:@{@"page": @(page),@"page_size": @(kPageSize),  @"dialog": @(dialogId), @"ordering": @"-created"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSDictionary *paramters = @{@"page": @(page),@"page_size": @(kPageSize),  @"dialog": @(dialogId), @"ordering": @"-created"};
+    return [manager GET:url parameters:paramters progress:nil  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) {
             NSHTTPURLResponse *response = (id)task.response;
             if (response.statusCode == 200) {

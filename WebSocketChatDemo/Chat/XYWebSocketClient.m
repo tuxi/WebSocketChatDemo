@@ -421,7 +421,7 @@ XYSocketResponseType const XYSocketResponseTypeOpponentReadMessage = @"opponent-
                 NSLog(@"已上线: %@", usernames[i]);
             }
 #endif
-            if (self.receiveMessageCallback) {
+            if (usernames.count && self.receiveMessageCallback) {
                 self.receiveMessageCallback(messageDict);
             }
         }

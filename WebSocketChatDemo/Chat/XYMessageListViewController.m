@@ -49,7 +49,7 @@
             }
             else if ([messageType isEqualToString:XYSocketResponseTypeOpponentTyping]) {
                 // 服务端实时返回了用户正在输入，对未返回正在输入时处理
-                weakSelf.navigationItem.title = @"对方正在输入中...";
+                weakSelf.navigationItem.title = @"对方输入中...";
                 [NSObject cancelPreviousPerformRequestsWithTarget:weakSelf selector:@selector(resetNavigationTitle) object:nil];
                 [weakSelf performSelector:@selector(resetNavigationTitle) withObject:nil afterDelay:1];
             }
