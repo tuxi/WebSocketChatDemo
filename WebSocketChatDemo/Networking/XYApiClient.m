@@ -32,7 +32,7 @@ static NSInteger const kPageSize = 20;
     
     // 忽略缓存
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:config];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
     // 将jwt传递给服务端，用于身份验证
     NSString *token = [NSString stringWithFormat:@"JWT %@", [XYAuthenticationManager manager].authToken];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -85,7 +85,7 @@ static NSInteger const kPageSize = 20;
     
     // 将jwt传递给服务端，用于身份验证
     NSString *token = [NSString stringWithFormat:@"JWT %@", [XYAuthenticationManager manager].authToken];
-    // 忽略缓存
+    // 忽略缓存 返回一个预设配置，没有持久性存储的缓存，Cookie或证书。这对于实现像"秘密浏览"功能的功能来说，是很理想的。
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:config];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

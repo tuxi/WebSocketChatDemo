@@ -11,8 +11,6 @@
 
 @interface XYDialogListViewModel ()
 
-@property (nonatomic, strong) NSMutableArray<XYUser *> *users;
-
 @end
 
 @implementation XYDialogListViewModel
@@ -30,6 +28,7 @@
 - (void)getMyFriendsWithIsMore:(BOOL)isMore completionHandler:(void (^ _Nullable)(NSArray<XYUser *> * _Nullable, NSError * _Nullable))completion {
     if (isMore == NO) {
         self.page = 1;
+        self.hasMore = YES;
     }
     if (self.hasMore == NO) {
         if (completion) {
@@ -52,7 +51,13 @@
             if (!isMore) {
                 [self.users removeAllObjects];
             }
-            [self.users addObjectsFromArray:response.results];
+            [response.results enumerateObjectsUsingBlock:^(XYUser *  _Nonnull user, NSUInteger idx, BOOL * _Nonnull stop) {
+                [self.dialogs enumerateObjectsUsingBlock:^(XYDialog * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (![obj.owner.username isEqualToString:user.username] && ![obj.opponent.username isEqualToString:user.username]) {
+                        [self.users addObject:user];
+                    }
+                }];
+            }];
             completion(response.results, nil);
         }
     }];
@@ -61,6 +66,7 @@
 - (void)getMyDialogsWithIsMore:(BOOL)isMore completionHandler:(void (^)(NSArray<XYDialog *> * _Nullable, NSError * _Nullable))completion {
     if (isMore == NO) {
         self.page = 1;
+        self.hasMore = YES;
     }
     if (self.hasMore == NO) {
         if (completion) {

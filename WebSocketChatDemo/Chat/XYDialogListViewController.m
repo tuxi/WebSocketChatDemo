@@ -12,6 +12,7 @@
 #import "XYMessageListViewController.h"
 #import "XYAuthenticationManager.h"
 #import "XYLoginViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface XYDialogListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -129,14 +130,16 @@
     static NSString *const kCellIdentifier = @"XYDialogTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:kCellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
     }
     XYDialog *dialog = self.viewModel.dialogs[indexPath.row];
     XYUser *oppponent = dialog.opponent;
     if ([XYAuthenticationManager manager].user.userId == dialog.opponent.userId) {
         oppponent = dialog.owner;
     }
-    cell.textLabel.text = oppponent.username;
+    NSURL *avatarURL = [NSURL URLWithString:oppponent.avatar];
+    [cell.imageView sd_setImageWithURL:avatarURL];
+    cell.textLabel.text = oppponent.nickname;
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"上一次: %@", dialog.modified];
     return cell;
