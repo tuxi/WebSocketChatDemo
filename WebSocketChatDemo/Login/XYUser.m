@@ -70,4 +70,11 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {}
 
+
+- (NSString *)nickname {
+    if (_nickname) {
+        return _nickname;
+    }
+    return _nickname = _username.mutableCopy;
+}
 @end

@@ -10,12 +10,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger,XYSocketStatus){
+// 响应到的 socket 数据包类型
+typedef NSString * XYSocketResponseType NS_STRING_ENUM;
+FOUNDATION_EXPORT XYSocketResponseType const XYSocketResponseTypeKey;
+FOUNDATION_EXPORT XYSocketResponseType const XYSocketResponseTypeGoneOnline; // 上线
+FOUNDATION_EXPORT XYSocketResponseType const XYSocketResponseTypeGoneOffline; // 下线
+FOUNDATION_EXPORT XYSocketResponseType const XYSocketResponseTypeNewMessage; // 新消息
+FOUNDATION_EXPORT XYSocketResponseType const XYSocketResponseTypeUsersChanged; // 聊天室中当前活动用户的已连接客户端列表
+FOUNDATION_EXPORT XYSocketResponseType const XYSocketResponseTypeOpponentTyping; // 对方正在输入中
+FOUNDATION_EXPORT XYSocketResponseType const XYSocketResponseTypeOpponentReadMessage; // 对方消息已读回执
+
+typedef NS_ENUM(NSInteger,XYSocketStatus) {
     XYSocketStatusConnected,// 已连接
     XYSocketStatusFailed,// 失败
-    XYSocketStatusClosedByServer,// 系统关闭
-    XYSocketStatusClosedByUser,// 用户关闭
+    XYSocketStatusClosed,
 };
+
 
 @interface XYWebSocketClient : NSObject
 
@@ -30,8 +40,8 @@ typedef NS_ENUM(NSInteger,XYSocketStatus){
 // 开始与某个用户对话
 - (void)openWithOpponent:(NSString *)username;
 
+// 关闭连接
 // 告诉对方我要下线了， 发送关闭连接的数据包
-// 断开连接，此操作应由用户触发，不再触发重连机制
 - (void)close;
 
 // 给对方发送消息

@@ -14,6 +14,8 @@
 #import "XYWebSocketClient.h"
 #import "XYAuthenticationManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "XYSafeTimer.h"
+#import "SVProgressHUD.h"
 
 #define kBackGroundColor  UIColorFromRGB(0xf1f1f1)
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue &0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00)>> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -23,7 +25,6 @@
 @property (nonatomic, strong) XYMessageListViewModel *viewModel;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
-// 对方
 @property (nonatomic, strong) XYUser *opponent;
 @property (nonatomic, strong) XYDialog *dialog;
 @property (nonatomic, strong) XYWebSocketClient *wsClient;
@@ -40,9 +41,25 @@
         self.wsClient = [[XYWebSocketClient alloc] init];
         __weak typeof(self) weakSelf = self;
         [self.wsClient onReceiveMessageCallback:^(NSDictionary * _Nonnull message) {
-            JSQMessage *mObj = [JSQMessage messageWithSenderId:weakSelf.opponent.username displayName:weakSelf.opponent.nickname ?: weakSelf.opponent.username text:message[@"message"]];
-            [weakSelf.viewModel.messageArray addObject:mObj];
-            [weakSelf finishReceivingMessageAnimated:YES];
+            NSString *messageType = message[XYSocketResponseTypeKey];
+            if ([messageType isEqualToString:XYSocketResponseTypeNewMessage]) {
+                JSQMessage *mObj = [JSQMessage messageWithSenderId:weakSelf.opponent.username displayName:weakSelf.opponent.nickname text:message[@"message"]];
+                [weakSelf.viewModel.messageArray addObject:mObj];
+                [weakSelf finishReceivingMessageAnimated:YES];
+            }
+            else if ([messageType isEqualToString:XYSocketResponseTypeOpponentTyping]) {
+                // 服务端实时返回了用户正在输入，对未返回正在输入时处理
+                weakSelf.navigationItem.title = @"对方正在输入中...";
+                [NSObject cancelPreviousPerformRequestsWithTarget:weakSelf selector:@selector(resetNavigationTitle) object:nil];
+                [weakSelf performSelector:@selector(resetNavigationTitle) withObject:nil afterDelay:1];
+            }
+            else if ([messageType isEqualToString:XYSocketResponseTypeGoneOnline]) {
+                [SVProgressHUD showInfoWithStatus:@"对方已上线"];
+            }
+            else if ([messageType isEqualToString:XYSocketResponseTypeGoneOffline]) {
+                [SVProgressHUD showInfoWithStatus:@"对方已下线"];
+            }
+            
         }];
     }
     return self;
@@ -94,7 +111,7 @@
 }
 
 - (void)setupViews {
-    self.navigationItem.title = [NSString stringWithFormat:@"与%@聊天中...",self.senderDisplayName];
+    [self resetNavigationTitle];
     self.collectionView.backgroundColor = kBackGroundColor;
     //绘制气泡
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
@@ -116,6 +133,10 @@
     [self setupHeaderRefresh];
     [self.collectionView.mj_header beginRefreshing];
     
+}
+
+- (void)resetNavigationTitle {
+    self.navigationItem.title = self.opponent.nickname;
 }
 
 // 下拉刷新控件，下拉获取更多消息
@@ -140,6 +161,9 @@
         [weakSelf.collectionView reloadData];
     }];
 }
+
+
+#pragma mark -
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -184,12 +208,6 @@
 // 头像
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 暂时不显示头像
-//    JSQMessage *message = [self.viewModel.messageArray objectAtIndex:indexPath.item];
-//
-//    JSQMessagesAvatarImage *cookImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:[message.senderId isEqualToString:self.senderId] ?@"demo_avatar_cook":@"demo_avatar_jobs"]
-//                                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-//    return cookImage;
     
     return nil;
 }
@@ -227,7 +245,7 @@
     }
     return [[NSAttributedString alloc] initWithString:message.senderDisplayName];
 }
-//底部label
+// 底部label
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
@@ -259,9 +277,7 @@
     else {
         avatarURL = [NSURL URLWithString:[XYAuthenticationManager manager].user.avatar];
     }
-    [cell.avatarImageView sd_setImageWithURL:avatarURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
+    [cell.avatarImageView sd_setImageWithURL:avatarURL completed:nil];
     
     return cell;
 }
@@ -328,7 +344,7 @@
     //    return kJSQMessagesCollectionViewCellLabelHeightDefault;
     return CGFLOAT_MIN;
 }
-//单元格底部label高度
+// 单元格底部label高度
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -343,7 +359,7 @@
 {
     NSLog(@"点击了加载之前的消息按钮");
 }
-//点击头像
+// 点击头像
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Tapped avatar!");
@@ -376,6 +392,7 @@
     return YES;
 }
 
+#pragma mark - Lazy
 - (XYMessageListViewModel *)viewModel {
     if (!_viewModel) {
         _viewModel = [XYMessageListViewModel new];

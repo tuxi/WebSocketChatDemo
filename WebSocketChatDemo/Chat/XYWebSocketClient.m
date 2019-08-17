@@ -21,6 +21,30 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
     }
 }
 
+typedef NSString * XYSocketRequestType NS_STRING_ENUM;
+/**
+ 发送socket的类型有以下7种
+ */
+static XYSocketRequestType const XYSocketRequestTypeNewMessage = @"new-message";
+static XYSocketRequestType const XYSocketRequestTypeNewUser = @"new-user";
+static XYSocketRequestType const XYSocketRequestTypeOnline = @"online";
+static XYSocketRequestType const XYSocketRequestTypeOffline = @"offline";
+static XYSocketRequestType const XYSocketRequestTypeCheckOnline = @"check-online";
+static XYSocketRequestType const XYSocketRequestTypeIsTyping = @"is-typing";
+static XYSocketRequestType const XYSocketRequestTypeReadMessage = @"read_message";
+
+XYSocketResponseType const XYSocketResponseTypeKey = @"type";
+
+/**
+ 接受到的socket类型
+ */
+XYSocketResponseType const XYSocketResponseTypeGoneOnline = @"gone-online"; // 上线
+XYSocketResponseType const XYSocketResponseTypeGoneOffline = @"gone-offline"; // 下线
+XYSocketResponseType const XYSocketResponseTypeNewMessage = @"new-message"; // 新消息
+XYSocketResponseType const XYSocketResponseTypeUsersChanged = @"users-changed"; // 聊天室中当前活动用户的已连接客户端列表
+XYSocketResponseType const XYSocketResponseTypeOpponentTyping = @"opponent-typing"; // 对方正在输入中
+XYSocketResponseType const XYSocketResponseTypeOpponentReadMessage = @"opponent-read-message"; // 对方消息已读回执
+
 @interface XYWebSocketClient () <SRWebSocketDelegate>
 
 @property (nonatomic, strong) SRWebSocket *socket;
@@ -39,7 +63,6 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
 
 - (void)dealloc {
     [self close];
-    [self removeObserver];
 }
 
 - (instancetype)init
@@ -58,7 +81,7 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
 }
 
 
-#pragma mark - Public methods
+#pragma mark - Send packet methods
 
 // 连接websocket服务器
 - (void)openWithOpponent:(NSString *)username {
@@ -84,18 +107,21 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
         NSOperationQueue *queue = [[NSOperationQueue alloc]init];
         queue.maxConcurrentOperationCount = 1;
         [self.socket setDelegateOperationQueue:queue];
+        
+        [self addObserver];
     });
     
 }
 
-// 结束连接
+// 关闭连接
 - (void)close {
     dispatch_main_async_safe(^{
         [self sendClosePacket];
+        self.status = XYSocketStatusClosed;
         [self.socket close];
         self.socket = nil;
-        self.status = XYSocketStatusClosedByUser;
         [self destoryHeartBeat];
+        [self removeObserver];
     });
     
 }
@@ -112,19 +138,16 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
                 break;
             }
             case XYSocketStatusFailed:
-                NSLog(@"发送失败");
+                NSLog(@"当前连接状态失败，无法发送");
                 break;
-            case XYSocketStatusClosedByServer:
-                NSLog(@"已经关闭");
-                break;
-            case XYSocketStatusClosedByUser:
-                NSLog(@"已经关闭");
+            case XYSocketStatusClosed:
+                NSLog(@"当前连接已关闭");
                 break;
         }
     });
 }
 
-// 安全发送数据包，防止非连接状态发送导致的crash
+// 安全发送数据包，防止未连接状态发送导致的crash
 - (void)safeSendPacket:(NSString *)packet {
     if (packet.length == 0) {
         return;
@@ -132,24 +155,21 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
     dispatch_main_async_safe(^{
         switch (self.status) {
             case XYSocketStatusConnected: {
-                NSLog(@"发送中。。。");
+                NSLog(@"正在发送：%@", packet);
                 [self.socket send:packet];
                 break;
             }
             case XYSocketStatusFailed:
-                NSLog(@"发送失败");
+                NSLog(@"当前连接状态失败，无法发送");
                 break;
-            case XYSocketStatusClosedByServer:
-                NSLog(@"已经关闭");
-                break;
-            case XYSocketStatusClosedByUser:
-                NSLog(@"已经关闭");
+            case XYSocketStatusClosed:
+                NSLog(@"当前连接已关闭");
                 break;
         }
     });
 }
 
-
+// 发送ping，用于维持不断线
 - (void)sendPing {
     dispatch_main_async_safe(^{
         switch (self.status) {
@@ -159,51 +179,60 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
                 break;
             }
             case XYSocketStatusFailed:
-                NSLog(@"发送失败");
+                NSLog(@"当前连接状态失败，无法发送");
                 break;
-            case XYSocketStatusClosedByServer:
-                NSLog(@"已经关闭");
-                break;
-            case XYSocketStatusClosedByUser:
-                NSLog(@"已经关闭");
+            case XYSocketStatusClosed:
+                NSLog(@"当前连接已关闭");
                 break;
         }
     });
 }
 
+// 发送以 获取当前聊天室中已活跃的用户列表
+- (void)sendNewUserPacket {
+    NSDictionary *dict = @{
+        @"type": XYSocketRequestTypeNewUser,
+        kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
+    };
+    NSString *packet = [self jsonWithDict:dict];
+    NSLog(@"获取当前聊天室中已活跃的用户列表");
+    [self safeSendPacket:packet];
+}
 
 // 发送上线的数据包
 - (void)sendConnectPacket {
     NSDictionary *dict = @{
-                           @"type": @"online",
+                           @"type": XYSocketRequestTypeOnline,
                            kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
                            };
     NSString *packet = [self jsonWithDict:dict];
-    NSLog(@"发送上线的数据包: %@", packet);
+    NSLog(@"正在发送上线的数据包");
     [self safeSendPacket:packet];
 }
 
-// websocket 连接成功后，检测对方是否在线
+// 检测对方是否在线
+// 最好在 websocket 连接成功后，发送此数据包
 - (void)sendOnlineCheckPacket {
     NSDictionary *dict = @{
-        @"type": @"check-online",
+        @"type": XYSocketRequestTypeCheckOnline,
         kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
         @"username": self.opponent
     };
     
     NSString *packet = [self jsonWithDict:dict];
-    NSLog(@"检查对方是否在线: %@", packet);
+    NSLog(@"正在发送检查对方是否在线的数据包");
     [self safeSendPacket:packet];
 }
 
+// 发送离线的数据包
 - (void)sendClosePacket {
     NSDictionary *dict = @{
-                           @"type": @"offline",
+                           @"type": XYSocketRequestTypeOffline,
                            kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
                            @"username": self.opponent
                            };
     NSString *packet = [self jsonWithDict:dict];
-    NSLog(@"下线，发送者: %@", packet);
+    NSLog(@"正在发送我下线的数据包");
     
     [self safeSendPacket:packet];
 }
@@ -211,32 +240,32 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
 // 发送已读消息数据包
 - (void)sendReadMessagePacketWithMessageId:(NSString *)messageId {
     NSDictionary *dict = @{
-        @"type": @"read_message",
+        @"type": XYSocketRequestTypeReadMessage,
         kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
         @"username": self.opponent,
         @"message_id": messageId,
     };
     NSString *packet = [self jsonWithDict:dict];
-    NSLog(@"已读消息 发送中: %@", packet);
+    NSLog(@"正在发送已读消息的数据包");
     [self safeSendPacket:packet];
 }
 
 // 告诉对方我正在输入， 键盘在输入时，发送正在输入的数据包
 - (void)sendTypingPacket {
     NSDictionary *dict = @{
-                           @"type": @"is-typing",
+                           @"type": XYSocketRequestTypeIsTyping,
                            kWebSocketTokenKey : [XYAuthenticationManager manager].authToken,
                            @"username": self.opponent,
                            @"typing": @(YES),
                            };
-    NSString *jsonStr = [self jsonWithDict:dict];
-    NSLog(@"正在输入中: %@", jsonStr);
-    [self.socket send:jsonStr];
+    NSString *packet = [self jsonWithDict:dict];
+    NSLog(@"正在发送正在输入的数据包");
+    [self safeSendPacket:packet];
 }
 
 
-// 重置心跳，最好在收到消息后重制心跳
-// 通过一个定时器，发送ping，服务器返回pong，维持websocket一直在线，防止一定的时间内未与服务器通讯，导致websocket超时断开请求
+// 重置心跳
+// 通过定时器，发送ping，服务器返回pong，维持websocket一直在线，防止一定的时间内未与服务器通讯，导致websocket超时断开请求
 - (void)resetHearBeat {
     dispatch_main_async_safe(^{
         [self destoryHeartBeat];
@@ -259,8 +288,6 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
                 }
                 
             });
-            
-            
         }];
         [[NSRunLoop currentRunLoop] addTimer:weakSelf.heartBeatTimer forMode:NSRunLoopCommonModes];
     });
@@ -320,10 +347,9 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
                 [self close];
                 return;
             }
-            // 计数+1
+            
             if (self.reconnectCount < self.maxReconnectCount - 1 &&
-                (self.status == XYSocketStatusClosedByServer ||
-                 self.status == XYSocketStatusFailed)) {
+                self.status == XYSocketStatusFailed) {
                 self.reconnectCount ++;
                 [self open];
             }
@@ -331,7 +357,6 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
     });
     
 }
-
 
 // 消息最终包装为json发送给服务器
 - (NSString *)messageConstructorWithText:(NSString *)text username:(NSString *)username {
@@ -341,10 +366,10 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
     
     // 根据服务端制定的规范，发送消息
     NSDictionary *data = @{
-                           @"type":@"new-message",
+                           @"type": XYSocketRequestTypeNewMessage,
                            kWebSocketTokenKey: [XYAuthenticationManager manager].authToken,
                            @"username": username,
-                           @"message":text
+                           @"message": text
                            };
     
     return [self jsonWithDict:data];
@@ -362,49 +387,49 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
 
 #pragma mark - SRWebSocketDelegate
 
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket
-{
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket {
     dispatch_main_async_safe(^{
-        NSLog(@"已连接");
+        NSLog(@"已经与【%@】建立连接", self.opponent);
         self.status = XYSocketStatusConnected;
         [self sendConnectPacket];
         [self sendOnlineCheckPacket];
         [self resetHearBeat];
     });
 }
-- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
-{
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
     dispatch_main_async_safe(^{
         NSLog(@"连接失败");
         self.status = XYSocketStatusFailed;
-        // 重连
         [self reconnect];
     });
 }
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
-{
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     
     dispatch_main_async_safe(^{
         NSData *packet = [message dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *messageDict = [NSJSONSerialization JSONObjectWithData:packet options:NSJSONReadingAllowFragments error:nil];
         
-        // 收到消息后，保存到数据库
-        
-        NSString *type = messageDict[@"type"];
+        NSString *type = messageDict[XYSocketResponseTypeKey];
         if (type == nil) {
             return;
         }
         
-        if ([type isEqualToString:@"gone-online"]) {
-            // 对方已上线
+        if ([type isEqualToString:XYSocketResponseTypeGoneOnline]) {
             NSArray *usernames = messageDict[@"usernames"];
+#if DEBUG
             for (NSInteger i = 0; i < usernames.count; i++) {
                 NSLog(@"已上线: %@", usernames[i]);
             }
+#endif
+            if (self.receiveMessageCallback) {
+                self.receiveMessageCallback(messageDict);
+            }
         }
-        else if ([type isEqualToString:@"gone-offline"]) {
-            // 对方已下线
+        else if ([type isEqualToString:XYSocketResponseTypeGoneOffline]) {
             NSLog(@"对方已下线: %@", self.opponent);
+            if (self.receiveMessageCallback) {
+                self.receiveMessageCallback(messageDict);
+            }
         }
         else if ([type isEqualToString:@"new-message"]) {
             // 收到新消息
@@ -419,14 +444,18 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
                 NSLog(@"接收到【%@】给【%@】发送的的消息:\n %@", messageDict[@"sender_name"], messageDict[@"username"], messageDict[@"message"]);
             }
         }
-        else if ([type isEqualToString:@"opponent-typing"]) {
-            // 对方正在输入
+        else if ([type isEqualToString:XYSocketResponseTypeOpponentTyping]) {
             NSLog(@"对方正在输入: %@", self.opponent);
+            if (self.receiveMessageCallback) {
+                self.receiveMessageCallback(messageDict);
+            }
         }
-        else if ([type isEqualToString:@"opponent-read-message"]) {
-            // 对方消息已读
+        else if ([type isEqualToString:XYSocketResponseTypeOpponentReadMessage]) {
             if ([messageDict[@"sender_name"] isEqualToString:self.opponent]) {
                 NSLog(@"对方消息已读: %@", self.opponent);
+            }
+            if (self.receiveMessageCallback) {
+                self.receiveMessageCallback(messageDict);
             }
         }
         else {
@@ -436,8 +465,7 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
     });
 }
 
-- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
-{
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
     dispatch_main_async_safe(^{
         if (reason) {
             NSLog(@"连接关闭，code:%ld,reason:%@,wasClean:%d",(long)code,reason,wasClean);
@@ -445,14 +473,14 @@ static void dispatch_main_async_safe(dispatch_block_t block) {
             // 连接成功后，有收到心跳信息，然后断开，断开信息：code:1001 reason :Stream end encountered wasclean:0
             // 解析：1001，离开。在收到心跳包的情况下，出现断开，这种情况只有服务器发送心跳包给你，你没有回复服务器，服务器默认你离开了。
             // 解决方法：回复心跳包给服务器，心跳包一问一答的对话方式保持socket连接。
-            self.status = XYSocketStatusClosedByServer;
+            self.status = XYSocketStatusFailed;
             [self reconnect];
         }
     });
    
 }
 - (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload {
-    NSLog(@"接收到服务器发送的pong");
+    NSLog(@"接收到pong");
     self.pongCount += 1;
 }
 

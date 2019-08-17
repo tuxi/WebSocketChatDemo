@@ -83,7 +83,7 @@ static XYLoginViewController *_instance = nil;
 }
 
 // 在XIB布局后才能改变视图结构，不然会被XIB改回去
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.currentStyle == XYLoginViewStyleLogin) {//记住账号名
         self.phoneNum.text = [[NSUserDefaults standardUserDefaults] objectForKey:kAccount];
@@ -131,7 +131,7 @@ static XYLoginViewController *_instance = nil;
 
 
 // 重置背景位置和定时器
-- (void)recover{
+- (void)recover {
     self.isAppear = YES;
     //启动需要时间，应设置比动画时间长，否则有可能会图像越界
     self.timer = [XYSafeTimer scheduledTimerWithTimeInterval:16 target:self selector:@selector(scrollScrollViewIsRecover:) userInfo:nil repeats:YES];
@@ -166,7 +166,8 @@ static XYLoginViewController *_instance = nil;
     
     if (direction) {
         newScrollViewContentOffset.x += dist;
-    }else {
+    }
+    else {
         newScrollViewContentOffset.x -= dist;
     }
     
@@ -206,7 +207,8 @@ static XYLoginViewController *_instance = nil;
 #pragma mark -- 各种按钮处理
 //忘记密码和获取验证码
 - (IBAction)forgetAndAuth:(id)sender {
-    if (self.currentStyle == XYLoginViewStyleRegister || self.currentStyle == XYLoginViewStyleForget) {
+    if (self.currentStyle == XYLoginViewStyleRegister ||
+        self.currentStyle == XYLoginViewStyleForget) {
         //注册模式
         if ([self phoneNumCheck]) {
             [self countDown];//开始倒计时
@@ -224,14 +226,14 @@ static XYLoginViewController *_instance = nil;
 }
 
 //正则表达式手机号检测
-- (BOOL)phoneNumCheck{
+- (BOOL)phoneNumCheck {
     NSString *regex = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [pred evaluateWithObject:self.phoneNum.text];
 }
 
 //按钮倒计时效果
-- (void)countDown{
+- (void)countDown {
     __block int time = 60;
     self.forgetAndAuth.enabled = NO;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -263,7 +265,7 @@ static XYLoginViewController *_instance = nil;
 /*
  发送验证码
  */
-- (void)sendSMS{
+- (void)sendSMS {
 #warning needTODO:发送验证码代码填写处
     [SVProgressHUD showSuccessWithStatus:@"发送成功"];
 }
@@ -303,7 +305,7 @@ static XYLoginViewController *_instance = nil;
             return;
         }
     }
-    else if (self.currentStyle == XYLoginViewStyleLogin){
+    else if (self.currentStyle == XYLoginViewStyleLogin) {
         //登录模式
         if (self.phoneNum.text.length == 0) {
             [SVProgressHUD showErrorWithStatus:@"请输入账号"];
@@ -341,7 +343,7 @@ static XYLoginViewController *_instance = nil;
 }
 
 //停止按钮动画，展示原本按钮
--(void)showLogin:(UIButton *)sender{
+- (void)showLogin:(UIButton *)sender {
     [self.deformation stopLoading];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         sender.alpha = 1;
@@ -361,7 +363,8 @@ static XYLoginViewController *_instance = nil;
         [self hiddenSubviews:NO duration:0.5];
         [self reverseView:UIViewAnimationTransitionFlipFromRight];
         self.currentStyle = XYLoginViewStyleLogin;
-    }else if(self.currentStyle == XYLoginViewStyleRegister){
+    }
+    else if (self.currentStyle == XYLoginViewStyleRegister){
         //进入登录模式
         self.pwdAndAuth.secureTextEntry = YES;
         [self.forgetAndAuth setTitle:@"忘记密码?" forState:UIControlStateNormal];
@@ -377,7 +380,8 @@ static XYLoginViewController *_instance = nil;
             self.login.frame = frame;
         }];
         self.currentStyle = XYLoginViewStyleLogin;
-    }else{
+    }
+    else {
         //相应名字修改
         self.pwdAndAuth.secureTextEntry = NO;
         [self.forgetAndAuth setTitle:@"获取验证码" forState:UIControlStateNormal];
@@ -397,7 +401,7 @@ static XYLoginViewController *_instance = nil;
 }
 
 //翻转动画
--(void)reverseView:(UIViewAnimationTransition)direction{
+- (void)reverseView:(UIViewAnimationTransition)direction {
     //翻转动画
     [UIView beginAnimations:@"doflip" context:nil];
     //设置时常
@@ -412,7 +416,7 @@ static XYLoginViewController *_instance = nil;
     [UIView commitAnimations];
 }
 
-- (void)sameCode{
+- (void)sameCode {
     self.weiboButton.alpha = 1;
     self.QQButton.alpha = 1;
     self.WechatButton.alpha = 1;
@@ -425,7 +429,7 @@ static XYLoginViewController *_instance = nil;
 }
 
 //不同的模式显示不同的界面
-- (void)changeModelHidden{
+- (void)changeModelHidden {
     [self userInteractionIsAllow:YES];
     switch (self.currentStyle) {
         case XYLoginViewStyleLogin:
@@ -497,7 +501,7 @@ static XYLoginViewController *_instance = nil;
     }
 }
 
-- (IBAction)changePwd:(id)sender{
+- (IBAction)changePwd:(id)sender {
     // 其他按钮的交互取消
     [self userInteractionIsAllow:NO];
     [self startLoading:sender];
@@ -511,7 +515,8 @@ static XYLoginViewController *_instance = nil;
         }
         if ([self.pwdAndAuth.text isEqualToString:self.registPwd.text]) {
 #warning needTODO:连接后台，修改密码代码
-        }else{
+        }
+        else {
             [SVProgressHUD showErrorWithStatus:@"两次密码不一致"];
             [self showLogin:self.changePwdBtn];
         }
@@ -519,7 +524,7 @@ static XYLoginViewController *_instance = nil;
 }
 
 //翻转隐藏不必要的控件
-- (void)hiddenSubviews:(BOOL)hidden duration:(NSInteger)duration{
+- (void)hiddenSubviews:(BOOL)hidden duration:(NSInteger)duration {
     if (hidden) {
         //相应名字修改
         [UIView animateWithDuration:duration animations:^{
@@ -590,7 +595,7 @@ static XYLoginViewController *_instance = nil;
 }
 
 //各类按钮点击功能开关
-- (void)userInteractionIsAllow:(BOOL)allow{
+- (void)userInteractionIsAllow:(BOOL)allow {
     self.weiboButton.userInteractionEnabled = allow;
     self.QQButton.userInteractionEnabled = allow;
     self.WechatButton.userInteractionEnabled = allow;
